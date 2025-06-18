@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    {include file="public/include"}
+</head>
+
+<body class="show">
+{include file="public/header"}
+
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="screen-box">
+                {include file="vod/screen"}
+            </div>
+            {if condition="$mzadydata['mzadycms']['s3']['ad4'] eq 1"}{include file="ads/ad4"}{/if}<!--筛选页广告-->
+            <div class="vod-list-box">
+                <div class="screen-head">
+                    <a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'time' ],'show')}" class="{if condition=" $param.by eq 'time' "}active{/if}">
+                        <div class="title">
+                            <span>添加时间</span>
+                            <?xml version="1.0" encoding="UTF-8"?><svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23 8H43" stroke="#ebebeb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 41L6 33" stroke="#ebebeb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 7V41" stroke="#ebebeb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M23 18H39" stroke="#ebebeb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M23 28H35" stroke="#ebebeb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M23 38H31" stroke="#ebebeb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                    </a>
+                    <a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'hits' ],'show')}" class="{if condition=" $param.by eq '' || $param.by eq 'hits' "}active{/if}">
+                        <div class="title">
+                            <span>人气高低</span>
+                            <?xml version="1.0" encoding="UTF-8"?><svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23 8H43" stroke="#ebebeb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 41L6 33" stroke="#ebebeb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 7V41" stroke="#ebebeb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M23 18H39" stroke="#ebebeb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M23 28H35" stroke="#ebebeb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M23 38H31" stroke="#ebebeb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                    </a>
+                    <a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'score' ],'show')}" class="{if condition=" $param.by eq 'score' "}active{/if}">
+                        <div class="title">
+                            <span>评分高低</span>
+                            <?xml version="1.0" encoding="UTF-8"?><svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23 8H43" stroke="#ebebeb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 41L6 33" stroke="#ebebeb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 7V41" stroke="#ebebeb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M23 18H39" stroke="#ebebeb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M23 28H35" stroke="#ebebeb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M23 38H31" stroke="#ebebeb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                    </a>
+                </div>
+                <div class="show-vod-list">
+                    <div class="movie-ul">
+                        {maccms:vod num="24" paging="yes" type="current" pageurl="vod/show" order="desc" by="hits"}
+                        {include file="block/vod_box"}
+                        {/maccms:vod}
+                    </div>
+                </div>
+            </div>
+            {include file="public/page"}
+        </div>
+    </div>
+</main>
+
+    {include file="public/footer"}
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+{if condition="$for.is && $for.block eq 'vod_list2'"} 
+<div class="item">
+    <div class="myui-vodbox">
+        <div class="top">
+            <div class="left">
+                <div class="title">{$for.title}</div>
+            </div>
+            <div class="right">
+                <div class="right_change randomBtn" data-list="#SliderList_{$key2}" data-api="{:mac_url('label/list_rand2',['type_id' => $for['type']])}">换一换<span class="iconfont icon-web-refresh-copy"></span></div>
+                {if $for.subval}
+                <a href="{$for.subval}">
+                    <div class="more">更多<span class="iconfont icon-back more-icon"></span></div>
+                </a>
+                {/if}
+            </div>
+        </div>
+        <div class="myui-vodbox-item">
+            <div class="content">
+                <div class="card-box" id="SliderList_{$key2}">
+                    {maccms:foreach name=":config_vodlist($for,12,$obj.vod_id)" id="vo" key="key"}
+                    {include file="block/vod_box"}
+                    {/maccms:foreach}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/if}

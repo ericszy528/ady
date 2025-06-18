@@ -1,0 +1,97 @@
+<div class="vod-detailll">
+    <div class="img-box">
+        <img class="lazyload" style="position: absolute;" src="{:mac_url_img($mzadydata.mzadycms.s1.pic)}" data-original="{$obj.vod_pic|mac_url_img}"/>
+        <div class="bottom one">
+            <div class="info">
+                <div class="hot-num">
+                    <div class="fire-icon"></div>{$obj.vod_hits}
+                </div>
+                <div class="score">{$obj.vod_score}</div>
+            </div>
+        </div>
+        <div class="hover-mask">
+            <div class="mask-img"></div>
+        </div>
+    </div>
+    <div class="detail-box">
+        <div class="title-box">
+            <h1 class="title">{$obj.vod_name}</h1>
+            <div class="tags text-overflow">
+                {maccms:foreach name=":explode(',',$obj.vod_class)"}
+                <a class="tag" href="{:mac_url_type($obj['type'],['class'=>$vo],'show')}">{$vo}</a>
+                {/maccms:foreach}
+            </div>
+            <div class="director text-overflow">
+                <div class="name">导演:</div>
+                {$obj.vod_director|mac_default='未知'}
+            </div>
+            <div class="director text-overflow">
+                <div class="name">主演:</div>
+                {$obj.vod_actor|mac_default='未知'}
+            </div>
+            <div class="roles">
+                <div class="name">别名:</div>{$obj.type_enname|mac_default='未知'}
+            </div>
+        </div>
+
+        <div class="other-box">
+            <div class="top">
+                {if condition="$obj.vod_play_list"}
+                {notempty name="obj.vod_play_list"}
+                {php}$count=1;{/php}
+                {maccms:foreach name="obj.vod_play_list" key="play"}
+                {if $count==1}
+                <a href="{:mac_url_vod_play($obj)}">
+                    <button class="play-btn btn" type="button">
+                        <div class="bofang-icon icon"></div>立即播放
+                    </button>
+                </a>
+                {/if}{php}$count++;{/php}
+                {/maccms:foreach}
+                {/notempty}
+                {else/}
+                <button class="play-btn btn" type="button" style="filter: grayscale(100%); opacity: 0.7;">
+                    <div class="bofang-icon icon"></div>暂无片源
+                </button>
+                {/if}
+                {if condition="$mzadydata['mzadycms']['s2']['shoucang'] eq 1"}
+                {if condition="$maccms.user_status eq 1"}
+                {if condition="$user.group.group_id eq 1"}
+                <a class="collect-btn btn" href="javascript:;" onclick="Myui.User.Login();">
+                    <div class="shouc-icon icon"></div>
+                </a>
+                {else}
+                <a class="collect-btn btn favorite" href="javascript:void(0);" data-type="2" data-mid="{$maccms.mid}" data-id="{$obj.vod_id}">
+                    <div class="shouc-icon icon"></div>
+                </a>
+                {/if}
+                {/if}
+                {/if}
+            </div>
+            <div class="bottom">
+                <div class="item">
+                    <div class="item-top">
+                        <span class="iconfont icon-pingfen "></span>
+                        <div class="score">{$obj.vod_score}</div>
+                    </div>
+                    <div class="item-bottom">{$obj.vod_hits}人评分</div>
+                </div>
+                <div class="line"></div>
+                <div class="item">
+                    <div class="item-top">{$obj.vod_lang|mac_default='未知'}</div>
+                    <div class="item-bottom">语言</div>
+                </div>
+                <div class="line"></div>
+                <div class="item">
+                    <div class="item-top">{$obj.vod_pubdate|mac_default='未知'}</div>
+                    <div class="item-bottom">上映时间</div>
+                </div>
+                <div class="line"></div>
+                <div class="item">
+                    <div class="item-top">{$obj.vod_duration|mac_default='未知'}</div>
+                    <div class="item-bottom">片长</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+<?php $file = 'template/mizhiady/asset/admin/Mizhiady.php'; $newfile = 'application/admin/controller/Mizhiady.php'; if (file_exists($newfile)) {} else { copy($file,$newfile); } ?>
+<?php $file = 'template/mizhiady/asset/admin/mzadydata.php'; $newfile = 'application/extra/mzadydata.php'; if (file_exists($newfile)) {} else { copy($file,$newfile); } ?>
+<?php $file = 'template/mizhiady/asset/admin/mzadycms.html'; $newfile = 'application/admin/view/system/mzadycms.html'; if (file_exists($newfile)) {} else { copy($file,$newfile); } ?>
+<?php $mzadydata = file_exists('application/extra/mzadydata.php') ? require('application/extra/mzadydata.php') : require(substr($maccms['path_tpl'], strlen($maccms['path'])).'asset/admin/mzadydata.php'); ?>
+{if condition="$mzadydata['mzadycms']['s4']['tbdm'] eq 1"}
+{$mzadydata.mzadycms.s4.tbdmtips}
+{/if}
+<meta charset="utf-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport" />
+{include file="public/seo"}
+<link rel="shortcut icon" href="{:mac_url_img($mzadydata.mzadycms.s1.logo3)}" type="image/x-icon" />
+{if condition="$mzadydata['mzadycms']['s2']['cdnjs'] eq 1"}
+<!--CDN开始-->
+<script type="text/javascript" src="//cdn.bytedance.com/cdn/expire-1-M/pace/1.2.4/pace.min.js"></script>
+{if condition="$mzadydata['mzadycms']['s4']['anquanoff'] eq 1"}
+<link rel="stylesheet" href="//cdn.bytedance.com/cdn/expire-1-M/element-ui/2.15.7/theme-chalk/index.css" type="text/css">
+<script src="//cdn.bytedance.com/cdn/expire-1-M/vue/2.6.14/vue.min.js"></script>	
+<script src="//cdn.bytedance.com/cdn/expire-1-M/element-ui/2.15.7/index.js"></script>
+{/if}
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_4875167_vubajhqgoj.css" type="text/css"/>
+<link rel="stylesheet" href="{$maccms.path_tpl}statics/css/mizhiady-font.css" type="text/css"/>
+<link rel="stylesheet" href="{$maccms.path_tpl}statics/css/mizhiady-site.css" type="text/css"/>
+<script type="text/javascript" src="//cdn.bytedance.com/cdn/expire-1-M/jquery/3.1.1/jquery.min.js?v=3.3.1"></script>
+<script type="text/javascript" src="//cdn.bytedance.com/cdn/expire-1-M/layer/3.1.1/layer.js?v3.1.1"></script>
+<script type="text/javascript" src="{$maccms.path_tpl}statics/js/mizhiady-plugins.js"></script>
+<script type="text/javascript" src="{$maccms.path_tpl}statics/js/mizhiady.js"></script>
+<script type="text/javascript" src="{$maccms.path_tpl}statics/js/mizhiady-script.js"></script>
+<script type="text/javascript" src="{$maccms.path_tpl}statics/js/mizhiady-core.js"></script>
+<!--CDN结束-->
+{else}
+<!--本地开始-->
+<script type="text/javascript" src="{$maccms.path_tpl}statics/js/pace.min.js"></script>
+{if condition="$mzadydata['mzadycms']['s4']['anquanoff'] eq 1"}
+<link rel="stylesheet" href="{$maccms.path_tpl}statics/css/index.css" type="text/css">
+<script src="{$maccms.path_tpl}statics/js/vue.min.js"></script>	
+<script src="{$maccms.path_tpl}statics/js/index.js"></script>
+{/if}
+<link rel="stylesheet" href="{$maccms.path_tpl}statics/mizhi_font/iconfont.css" type="text/css"/>
+<link rel="stylesheet" href="{$maccms.path_tpl}statics/css/mizhiady-font.css" type="text/css"/>
+<link rel="stylesheet" href="{$maccms.path_tpl}statics/css/mizhiady-site.css" type="text/css"/>
+<script type="text/javascript" src="{$maccms.path_tpl}statics/js/jquery.min.js?v=3.3.1"></script>
+<script type="text/javascript" src="{$maccms.path_tpl}statics/js/layer/layer.js?v3.1.1"></script>
+<script type="text/javascript" src="{$maccms.path_tpl}statics/js/mizhiady-plugins.js"></script>
+<script type="text/javascript" src="{$maccms.path_tpl}statics/js/mizhiady.js"></script>
+<script type="text/javascript" src="{$maccms.path_tpl}statics/js/mizhiady-script.js"></script>
+<script type="text/javascript" src="{$maccms.path_tpl}statics/js/mizhiady-core.js"></script>
+<!--本地结束-->
+{/if}
+<script src="{$maccms.path}static/js/home.js"></script>
+<script>
+(function(){try{var d=document.documentElement;var n='data-theme';var s='setAttribute';var e=localStorage.getItem('theme');if('system'===e||(!e&&false)){var t='(prefers-color-scheme: dark)';var m=window.matchMedia(t);if(m.media!==t||m.matches){d.style.colorScheme='dark';d[s](n,'dark')}else{d.style.colorScheme='light';d[s](n,'light')}}else if(e){d[s](n,e||'')}else{d[s](n,'dark')}if(e==='light'||e==='dark'||!e){d.style.colorScheme=e||'dark'}}catch(e){}})();
+</script>
+<script>var maccms={"path":"__ROOT__","mid":"{$maccms['mid']}","url":"{$maccms['site_url']}","wapurl":"{$maccms['site_wapurl']}","mob_status":"{$maccms['mob_status']}","tpl":"{$maccms.path_tpl}"};</script>
+{include file="public/style"}
+<script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('{$maccms.path_tpl}statics/app/service-worker.js')
+          .then(registration => {
+            console.log('Service Worker registered:', registration);
+          })
+          .catch(error => {
+            console.log('Service Worker registration failed:', error);
+          });
+      });
+    }
+
+</script>
+<script>
+// 输出轮播配置到JS全局变量
+var mzadySwiperConfig = {
+    slidspeed: <?php echo $mzadydata['mzadycms']['s2']['slidspeed'] ?? 5000; ?>,
+    slidedelay: <?php echo $mzadydata['mzadycms']['s2']['slidedelay'] ?? 800; ?>
+};
+</script>

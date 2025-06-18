@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>会员中心 - {$maccms.site_name}</title>
+    <meta name="keywords" content="{$maccms.site_keywords}" />
+	<meta name="description" content="{$maccms.site_description}" />
+    {include file="user/include"}
+</head>
+
+<body>
+    {php}
+    $nav = 'info';
+    {/php}
+    {include file="public/header"}
+    <div class="container">
+        <div class="row">
+            <main class="user-info">
+                {include file="user/head"}
+                <aside class="right-side">
+                    <section class="tab">
+                        <ul>
+                            <li class=""><a href="{:mac_url('user/index')}">个人资料</a></li>
+                            <li class="active">修改信息</li>
+                        </ul>
+                    </section>
+                    <section class="content">
+                        <section>
+                            <form id="fm" name="fm" method="post" action="" >
+                            <div class="input-box">
+                                <span>用户名：</span>
+                                <input disabled="" placeholder="请输入用户名" value="{$obj.user_name}" style="color: rgb(32, 36, 45);">
+                            </div>
+                            <div class="input-box">
+                                <span>原始密码：</span>
+                                <input maxlength="12"  minlength="6" placeholder="请输入旧密码" name="user_pwd"  value="" style="color: rgb(32, 36, 45);" type="password">
+                            </div>
+                            <div class="input-box">
+                                <span>新密码：</span>
+                                <input maxlength="12" minlength="6" placeholder="请设置新密码（6-12位字母/数字）" name="user_pwd1" value="" style="color: rgb(32, 36, 45);" type="password">
+                            </div>
+                            <div class="input-box">
+                                <span>确认密码：</span>
+                                <input maxlength="12" minlength="6" placeholder="请在此确认新密码" name="user_pwd2" value="" style="color: rgb(32, 36, 45);" type="password">
+                            </div>
+                            <div class="input-box" style="border-bottom:none">
+                                <span class="hidden-sm hidden-xs"></span>
+                                <button id="btn_submit">确认保存</button></div>
+                            </form>
+                        </section>
+                    </section>
+                </aside>
+            </main>
+        </div>
+    </div>
+    {include file="public/footer"}
+</body>
+</html>

@@ -1,0 +1,4 @@
+{php}$type = input('type_id')? intval(input('type_id')):'all';{/php}
+{maccms:vod num="12" type="'.$type.'" order="desc" by="rnd"}
+{include file="block/vod_box"}
+{/maccms:vod}

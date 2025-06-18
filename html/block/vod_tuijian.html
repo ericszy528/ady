@@ -1,0 +1,13 @@
+<div class="item week">
+    <div class="hot-vod-list">
+        <div class="content-body">
+            <div class="content-title iconfont icon-dianzan">{$mzadydata.mzadycms.s2.zztuijianheadline}</div>
+            <div class="content-tips">{$mzadydata.mzadycms.s2.zztuijiansubheading}</div>
+            <div class="vod-list">
+                {maccms:vod num="'.$mzadydata['mzadycms']['s2']['zztuijiannum'].'" type="all" order="desc" by="time" key="key" level="'.$mzadydata['mzadycms']['s2']['zztuijianlevels'].'"}
+                {include file="block/vod_box"}
+                {/maccms:vod}
+            </div>
+        </div>
+    </div>
+</div>

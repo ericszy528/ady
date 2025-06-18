@@ -1,0 +1,75 @@
+    <!--评论开始-->
+    <div class="comment_form_box clearfix">
+        <div class="myui_comment_right">
+            <form class="comment_form clearfix">
+                <input type="hidden" name="comment_pid" value="0">
+                <!--评论框-->
+                <div class="myui-comment__form clearfix">       	
+                    <textarea class="comment_data form-control no-resize" name="comment_content" rows="5" placeholder="最多可以输入200字符"></textarea>
+                    <div class="comment_data_foot clearfix">
+                        <div class="pull-right">
+                            {if condition="$comment.verify eq 1"}
+                            <img id="verify_img" src="{:url('verify/index')}" onClick="this.src=this.src+'?'"  alt="单击刷新" height="30" />	                
+                            &nbsp;&nbsp;<input class="form-control verify" type="text" id="verify" onkeydown="if(event.keyCode==13){event.keyCode=0;event.returnValue=false;}" name="verify" placeholder="验证码" />
+                            {/if}
+                        <a href="javascript:;" class="my_comment_submit btn pull-right">发送</a>
+                        </div>
+                    </div>	            
+                </div>
+            </form>
+        </div>
+    </div>
+    {maccms:comment num="10" paging="yes" order="desc" by="id"}{/maccms:comment}
+    {notempty name="__LIST__"}
+	<div class="col-xs-1 p0 pt10">
+        {maccms:foreach name="__LIST__" id="vo"}
+       	<div class="styu-message__list comment  clearfix">
+			<div class="avatar">
+				<a href="javascript:;"><img class="face" src="__STATIC__/images/home/duface.png" width="45" height="45" /></a> 
+			</div>
+			<div class="data">
+				
+				<h5 class="name"><a class="font-fff mr10" href="javascript:;">{$vo.comment_name}</a><span class="text-light-grey-7">{$vo.comment_time|date='Y-m-d H:i:s',###}</span></h5>
+				<p class="content text-grey-7">{$vo.comment_content|mac_em_replace}</p>
+	            {maccms:foreach name="$vo.sub" id="child"}
+		        <div class="styu-message__list child clearfix">
+					<div class="avatar">
+						<a href="javascript:;"><img class="face" src="__STATIC__/images/home/duface.png" width="45" height="45" /></a> 
+					</div>
+					<div class="data">
+						<span class="text-muted pull-right">{$child.comment_time|date='Y-m-d H:i:s',###}</span>
+						<h5 class="name"><a class="font-bold" href="javascript:;">{$child.comment_name}</a></h5>
+						<p class="content">{$child.comment_content|mac_em_replace}</p>
+						<div class="foot clearfix">
+		                	<a class="my_comment_report pull-right text-muted" data-id="{$child.comment_id}" href="javascript:;">举报 <i class="fa fa-exclamation-circle"></i></a>
+		                    <a class="digg_link text-muted" data-id="{$child.comment_id}" data-mid="4" data-type="up" href="javascript:;">
+		                        <i class="fa fa-thumbs-up"></i>
+		                        <span class="digg_num text-red">{$child.comment_up}</span>
+		                    </a>
+		                    <span class="split-line"></span>
+		                    <a class="digg_link text-muted" data-id="{$child.comment_id}" data-mid="4" data-type="down" href="javascript:;">
+		                        <i class="fa fa-thumbs-down"></i>
+		                        <span class="digg_num text-red">{$child.comment_down}</span>
+		                    </a>                   
+		                </div>
+					</div>
+				</div> 
+		        {/maccms:foreach}   
+			</div>
+		</div>                        
+        {/maccms:foreach}
+    </div>
+    <!--评论结束-->
+    
+    {if condition="$__PAGING__.page_total gt 1"}
+    <div class="pagination">
+        <div class="pages-box">
+            <div><a class="page" href="javascript:void(0);" onclick="Myui.Comment.Show('{$__PAGING__.page_prev}')"><</a></div>							
+            {maccms:foreach name="$__PAGING__.page_num" id="num"}
+            <div class="hidden-xs"><a class="page{if condition="$__PAGING__['page_current'] eq $num"} active{/if}" href="javascript:void(0)" onclick="Myui.Comment.Show('{$num}')">{$num}</a></div>
+            {/maccms:foreach}
+            <div><a class="page" href="javascript:void(0)" onclick="Myui.Comment.Show('{$__PAGING__.page_next}')">></a></div>		
+        </div>
+    </div>
+	{/if}
+	{/notempty}

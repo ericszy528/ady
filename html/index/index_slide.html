@@ -1,0 +1,135 @@
+<div class="banner gap">
+    <div class="banner-box">
+        <div class="banner-pic mizhiady-swiper mizhiady-swiper-image" data-effect="slide" data-pagination=".nav-name" data-pagination-class="name" data-pagination-active-class="active" data-loop="true">
+            <div class="swiper-wrapper">
+            <!-- 自定义海报开始 -->
+            {if condition="$mzadydata['mzadycms']['s2']['slidediy1'] eq 1"}
+            <div class="swiper-slide active">
+                <a class="swiper-lazy" href="{$mzadydata.mzadycms.s2.slidediy1url}" target="_blank"  style="background-image: url({$mzadydata.mzadycms.s2.slidediy1pic});" title="{$mzadydata.mzadycms.s2.slidediy1name}">
+                </a>
+                <div class="banner-nav-box">
+                    <a class="swiper-lazy" href="{$mzadydata.mzadycms.s2.slidediy1url}" target="_blank"  style="background-image: url({$mzadydata.mzadycms.s2.slidediy1pic});" title="{$mzadydata.mzadycms.s2.slidediy1name}">
+                        <div class="swiper-pagination-html" style="display: none;">
+                            <h3>{$mzadydata.mzadycms.s2.slidediy1name}</h3>
+                            <p>{$mzadydata.mzadycms.s2.slidediy1fname}</p>
+                        </div>
+                    </a>
+            <div class="slide-btn-box hidden-xs">
+                <a class="play-btn" href="{$mzadydata.mzadycms.s2.slidediy1url}" target="_blank"><i class="iconfont icon-adgg"></i>&nbsp;&nbsp;{$mzadydata.mzadycms.s2.slidediy1name}</a>
+            </div>
+                </div>
+                <div class="m-slide-btn-box">
+                    <div class="m-detail-box">
+                        <span class="title text-overflow">{$mzadydata.mzadycms.s2.slidediy1name}</span>
+                        <div class="tags text-overflow">
+                        </div>
+                        <span class="content text-overflow-2">{$mzadydata.mzadycms.s2.slidediy1fname}</span>
+                    </div>
+                </div>
+            </div>
+        {/if}
+        <!--自定义2-->  
+            {if condition="$mzadydata['mzadycms']['s2']['slidediy2'] eq 1"}
+            <div class="swiper-slide active">
+                <a class="swiper-lazy" href="{$mzadydata.mzadycms.s2.slidediy2url}" target="_blank"  style="background-image: url({$mzadydata.mzadycms.s2.slidediy2pic});" title="{$mzadydata.mzadycms.s2.slidediy2name}">
+                </a>
+                <div class="banner-nav-box">
+                    <a class="swiper-lazy" href="{$mzadydata.mzadycms.s2.slidediy2url}" target="_blank" style="background-image: url({$mzadydata.mzadycms.s2.slidediy2pic});" title="{$mzadydata.mzadycms.s2.slidediy2name}">
+                        <div class="swiper-pagination-html" style="display: none;">
+                            <h3>{$mzadydata.mzadycms.s2.slidediy2name}</h3>
+                            <p>{$mzadydata.mzadycms.s2.slidediy2fname}</p>
+                        </div>
+                    </a>
+            <div class="slide-btn-box hidden-xs">
+                <a class="play-btn" href="{$mzadydata.mzadycms.s2.slidediy2url}" target="_blank"><i class="iconfont icon-adgg"></i>&nbsp;&nbsp;{$mzadydata.mzadycms.s2.slidediy2name}</a>
+            </div>
+                </div>
+                <div class="m-slide-btn-box">
+                    <div class="m-detail-box">
+                        <span class="title text-overflow">{$mzadydata.mzadycms.s2.slidediy2name}</span>
+                        <div class="tags text-overflow">
+                        </div>
+                        <span class="content text-overflow-2">{$mzadydata.mzadycms.s2.slidediy2fname}</span>
+                    </div>
+                </div>
+            </div>
+            {/if}
+        <!--自定义3--> 
+            {if condition="$mzadydata['mzadycms']['s2']['slidediy3'] eq 1"}
+            <div class="swiper-slide active">
+                <a class="swiper-lazy" href="{$mzadydata.mzadycms.s2.slidediy3url}" target="_blank" style="background-image: url({$mzadydata.mzadycms.s2.slidediy3pic});" title="{$mzadydata.mzadycms.s2.slidediy3name}">
+                </a>
+                <div class="banner-nav-box">
+                    <a class="swiper-lazy" href="{$mzadydata.mzadycms.s2.slidediy3url}" target="_blank" style="background-image: url({$mzadydata.mzadycms.s2.slidediy3pic});" title="{$mzadydata.mzadycms.s2.slidediy3name}">
+                        <div class="swiper-pagination-html" style="display: none;">
+                            <h3>{$mzadydata.mzadycms.s2.slidediy3name}</h3>
+                            <p>{$mzadydata.mzadycms.s2.slidediy3fname}</p>
+                        </div>
+                    </a>
+            <div class="slide-btn-box hidden-xs">
+                <a class="play-btn" href="{$mzadydata.mzadycms.s2.slidediy3url}" target="_blank"><i class="iconfont icon-adgg"></i>&nbsp;&nbsp;{$mzadydata.mzadycms.s2.slidediy3name}</a>
+            </div>
+                </div>
+                <div class="m-slide-btn-box">
+                    <div class="m-detail-box">
+                        <span class="title text-overflow">{$mzadydata.mzadycms.s2.slidediy3name}</span>
+                        <div class="tags text-overflow">
+                        </div>
+                        <span class="content text-overflow-2">{$mzadydata.mzadycms.s2.slidediy3fname}</span>
+                    </div>
+                </div>
+            </div>
+                {/if}
+                    <!-- 自定义海报结束 -->
+                {maccms:vod num="'.$mzadydata['mzadycms']['s2']['slidenum'].'" type="all" order="desc" by="time" level="'.$mzadydata['mzadycms']['s2']['slidetj'].'"}
+				<div class="swiper-slide active">
+                    <a class="swiper-lazy" href="{:mac_url_vod_detail($vo)}" style="background-image: url({$vo.vod_pic_slide|mac_url_img});" title="{$vo.vod_name}">
+                    </a>
+                    <div class="banner-nav-box">
+                        <a class="swiper-lazy" href="{:mac_url_vod_detail($vo)}" style="background-image: url({$vo.vod_pic_slide|mac_url_img});" title="{$vo.vod_name}">
+                            <div class="swiper-pagination-html" style="display: none;">
+                                <h3>{$vo.vod_name}</h3>
+                                <p>{$vo.vod_version}</p>
+                            </div>
+                        </a>
+                        <div class="slide-btn-box hidden-xs">
+							<a class="play-btn" href="{:mac_url_vod_play($vo,['sid'=>1,'nid'=>1])}"><i class="iconfont icon-play-mini"></i>&nbsp;&nbsp;立即观看</a>
+                            {if condition="$maccms.user_status eq 1"}
+                                {if condition="$user.group.group_id eq 1"}
+                                <a class="fav-btn mizhiady-ulog" href="javascript:;" onclick="Myui.User.Login();"><i class="iconfont icon-love"></i></a>
+                                {else}
+                                <!--<a class="fav-btn mizhiady-ulog mizhiady-ulog-get favorite" href="javascript:;" data-id="{$vo.id}" data-mid="1" data-type="2"><i class="iconfont icon-love"></i></a>-->
+                                <a class="fav-btn mizhiady-ulog mizhiady-ulog-get favorite" href="{:mac_url_vod_detail($vo,['sid'=>1,'nid'=>1])}" data-id="{$vo.id}" data-mid="1" data-type="2"><i class="iconfont icon-love"></i></a>
+                                {/if}
+                            {/if}
+                        </div>
+                    </div>
+                    <div class="m-slide-btn-box">
+                        <div class="m-detail-box">
+                            <span class="title text-overflow">{$vo.vod_name}</span>
+                            <div class="tags text-overflow">
+                                <span class="score"><span class="iconfont icon-pingfen"></span>{$vo.vod_score}</span>
+								{maccms:foreach name=":explode(',',$vo.vod_class)" id="voo"}
+								<span class="tag"><a href="{:mac_url_type($voo['type'],['class'=>$voo],'show')}">{$voo}</a></span>
+								{if $key>1}{php}break;{/php}{/if}
+								{/maccms:foreach}
+                            </div>
+                            <span class="content text-overflow-2">{$vo.vod_blurb}..........</span>
+                        </div>
+                    </div>
+                </div>
+				{/maccms:vod}
+            </div>
+            <div class="banner-nav-box hidden-xs">
+                <div class="nav-name"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+// 输出轮播配置到JS全局变量
+var mzadySwiperConfig = {
+    slidspeed: <?php echo $mzadydata['mzadycms']['s2']['slidspeed'] ?? 5000; ?>,
+    slidedelay: <?php echo $mzadydata['mzadycms']['s2']['slidedelay'] ?? 800; ?>
+};
+</script>

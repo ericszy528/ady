@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    {include file="public/include"}
+</head>
+<body id="detail">
+{include file="public/header"}
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="vod-detail-box">
+                {include file="vod/detail_data"}
+                <div class="vod-content">
+                    <div class="title">简介:</div>
+                    <div class="intro">
+                        <div class="wrapper_more">
+                            <input class="wrapper_more_exp" id="exp1" type="checkbox" />
+                            <div class="wrapper_more_text">
+                                <label class="wrapper_more_btn" for="exp1" style="display: none"></label>
+                                <div>{$obj.vod_content|mac_default='暂无'}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 详情页广告 -->
+                {if condition="$mzadydata['mzadycms']['s3']['ad2'] eq 1"}{include file="ads/ad2"}{/if}
+                {include file="vod/vod_list"}
+                {include file="vod/like"}
+            </div>
+        </div>
+    </div>
+</main>
+<div class="share-tan share_html_{$obj.vod_id}" style="display: none;">
+    <h3>{$obj.vod_name}</h3>
+    <div style="text-align: center;margin-top: 15px;">
+        <span class="qrcode-img">
+            <img class="mac_qrcode" alt="扫一扫手机看" width="197" height="197"/>
+        </span>
+    </div>
+    <div class="union-box clearfix" style="text-align: center;margin-top:10px;">
+        <input class="form-control pull-left" value="{:Request()->domain()}{:mac_url_vod_detail($obj)}">
+        <a class="copy-btn myui-copy-link" data-url="{:Request()->domain()}{:mac_url_vod_detail($obj)}" href="javascript:;">复制</a>
+    </div>  
+    <script>
+        $(".myui-copy-link").each(function(){
+            var links = $(this).attr("data-url");
+            MyTheme.Link.Copy.Set(this,links);
+        });
+    </script>
+</div>
+<span class="mac_hits hits hidden" data-mid="{$maccms.mid}" data-id="{$obj.vod_id}{$obj.art_id}{$obj.topic_id}" data-type="hits"></span>
+{include file="public/footer"}
+<script>
+    if($(".wrapper_more_text div").height() > 60){
+        $(".wrapper_more_btn").show(); 
+    }else{
+        $(".wrapper_more_btn").hide();
+    }
+</script>
+{if condition="$param.sid eq 0"}
+<script type="text/javascript">
+    $(".tab-pane:first,.nav-btn li:first").addClass("active");
+</script>
+{/if}
+
+</body>
+
+</html>

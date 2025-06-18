@@ -1,0 +1,305 @@
+<script type="text/javascript">
+$(document).ready(function() {
+    var player = $('.MacPlayer');
+    var playerContainer = player.closest('#PlayerVideoArea');
+    var originalPosition = playerContainer.offset().top;
+    var isFloating = false;
+    var scrollTimeout;
+    var isDragging = false;
+    var startX, startY, offsetX, offsetY;
+    
+    // 创建关闭按钮
+    var closeBtn = $('<div class="float-close-btn"><span class="iconfont icon-close"></span></div>');
+    // 创建拖动按钮
+    var dragBtn = $('<div class="float-drag-btn"><span class="iconfont icon-tuodong-01"></span></div>');
+    
+    // 只在滚动停止时检测
+    $(window).scroll(function() {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(function() {
+            var scrollTop = $(window).scrollTop();
+            
+            if (!isFloating && scrollTop > originalPosition + 300) {
+                // 进入悬浮状态
+                enterFloatingMode();
+            } else if (isFloating && scrollTop <= originalPosition) {
+                // 恢复原始状态
+                exitFloatingMode();
+            }
+        }, 100);
+    });
+    
+    // 进入悬浮模式
+    function enterFloatingMode() {
+        if(isFloating) return;
+        
+        // 保存原始位置和尺寸
+        playerContainer.data('original-style', {
+            position: playerContainer.css('position'),
+            top: playerContainer.css('top'),
+            left: playerContainer.css('left'),
+            width: playerContainer.css('width'),
+            height: playerContainer.css('height'),
+            margin: playerContainer.css('margin')
+        });
+        
+        playerContainer.addClass('floating-player');
+        playerContainer.append(closeBtn);
+        playerContainer.append(dragBtn);
+        isFloating = true;
+        
+        // 添加拖动功能
+        setupDrag();
+        
+        // 滚动到原始位置
+        closeBtn.on('click', function() {
+            $('html, body').animate({
+                scrollTop: originalPosition - 50
+            }, 300, function() {
+                exitFloatingMode();
+            });
+        });
+    }
+    
+    // 退出悬浮模式
+    function exitFloatingMode() {
+        if(!isFloating) return;
+        
+        // 恢复原始样式
+        var originalStyle = playerContainer.data('original-style');
+        playerContainer.removeClass('floating-player');
+        playerContainer.css({
+            position: originalStyle.position,
+            top: originalStyle.top,
+            left: originalStyle.left,
+            width: originalStyle.width,
+            height: originalStyle.height,
+            margin: originalStyle.margin
+        });
+        
+        // 移除拖动事件
+        dragBtn.off('mousedown touchstart');
+        $(document).off('mousemove touchmove');
+        $(document).off('mouseup touchend');
+        
+        closeBtn.off('click').remove();
+        dragBtn.remove();
+        isFloating = false;
+        isDragging = false;
+    }
+    
+    // 设置拖动功能
+    function setupDrag() {
+        dragBtn.on('mousedown touchstart', function(e) {
+            isDragging = true;
+            
+            // 获取初始位置
+            var containerOffset = playerContainer.offset();
+            offsetX = containerOffset.left;
+            offsetY = containerOffset.top;
+            
+            // 获取鼠标/触摸初始位置
+            var clientX = e.type === 'touchstart' ? e.originalEvent.touches[0].clientX : e.clientX;
+            var clientY = e.type === 'touchstart' ? e.originalEvent.touches[0].clientY : e.clientY;
+            
+            startX = clientX - offsetX;
+            startY = clientY - offsetY;
+            
+            // 阻止默认行为和冒泡
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // 添加拖动时的类
+            playerContainer.addClass('dragging');
+        });
+        
+        $(document).on('mousemove touchmove', function(e) {
+            if (!isDragging) return;
+            
+            var clientX = e.type === 'touchmove' ? e.originalEvent.touches[0].clientX : e.clientX;
+            var clientY = e.type === 'touchmove' ? e.originalEvent.touches[0].clientY : e.clientY;
+            
+            // 计算新位置
+            var newLeft = clientX - startX;
+            var newTop = clientY - startY;
+            
+            // 限制在窗口范围内
+            var windowWidth = $(window).width();
+            var windowHeight = $(window).height();
+            var containerWidth = playerContainer.outerWidth();
+            var containerHeight = playerContainer.outerHeight();
+            
+            newLeft = Math.max(0, Math.min(newLeft, windowWidth - containerWidth));
+            newTop = Math.max(0, Math.min(newTop, windowHeight - containerHeight));
+            
+            // 应用新位置
+            playerContainer.css({
+                left: newLeft + 'px',
+                top: newTop + 'px',
+                right: 'auto',
+                bottom: 'auto'
+            });
+            
+            e.preventDefault();
+            e.stopPropagation();
+        });
+        
+        $(document).on('mouseup touchend', function() {
+            if (isDragging) {
+                isDragging = false;
+                playerContainer.removeClass('dragging');
+            }
+        });
+    }
+    
+    // 窗口大小变化时重新计算
+    $(window).resize(function() {
+        if (!isFloating) {
+            originalPosition = playerContainer.offset().top;
+        } else {
+            // 如果正在悬浮，确保播放器保持在可视范围内
+            var containerWidth = playerContainer.outerWidth();
+            var containerHeight = playerContainer.outerHeight();
+            var windowWidth = $(window).width();
+            var windowHeight = $(window).height();
+            
+            var currentLeft = parseInt(playerContainer.css('left'));
+            var currentTop = parseInt(playerContainer.css('top'));
+            
+            var newLeft = Math.max(0, Math.min(currentLeft, windowWidth - containerWidth));
+            var newTop = Math.max(0, Math.min(currentTop, windowHeight - containerHeight));
+            
+            playerContainer.css({
+                left: newLeft + 'px',
+                top: newTop + 'px'
+            });
+        }
+    });
+});
+</script>
+
+<style>
+/* 原始播放器样式保持不变 */
+.MacPlayer.embed-responsive {
+    padding-bottom: 56.25%;
+}
+
+/* 悬浮状态样式 */
+.floating-player {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 100px !important;
+    width: 500px !important;
+    height: 300px !important;
+    z-index: 9999 !important;
+    margin: 0 !important;
+    background: #000;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    animation: fadeIn 0.3s ease-out;
+}
+
+.floating-player.dragging {
+    box-shadow: 0 0 15px rgba(0,0,0,0.7);
+    opacity: 0.9;
+}
+
+.floating-player .MacPlayer {
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+    padding-bottom: 0 !important;
+    top: 0 !important;
+    left: 0 !important;
+}
+
+/* 关闭按钮样式 */
+.float-close-btn {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    width: 24px;
+    height: 24px;
+    background: var(--theme-color);
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: all 0.3s;
+}
+
+.float-close-btn:hover {
+    background: var(--theme-color);
+    transform: scale(1.1);
+}
+
+.float-close-btn .iconfont {
+    font-size: 12px;
+}
+
+/* 拖动按钮样式 */
+.float-drag-btn {
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    width: 24px;
+    height: 24px;
+    background: var(--theme-color);
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: move;
+    z-index: 10000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: all 0.3s;
+}
+
+.float-drag-btn:hover {
+    background: var(--theme-color);
+    transform: scale(1.1);
+}
+
+.float-drag-btn .iconfont {
+    font-size: 12px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0.5; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 响应式调整 */
+@media (max-width: 767px) {
+    .floating-player {
+        width: 280px !important;
+        height: 158px !important;
+        bottom: 10px !important;
+        right: 10px !important;
+    }
+    
+    .float-close-btn, .float-drag-btn {
+        top: -10px;
+        width: 20px;
+        height: 20px;
+    }
+    
+    .float-close-btn {
+        right: -10px;
+    }
+    
+    .float-drag-btn {
+        left: -10px;
+    }
+    
+    .float-close-btn .iconfont,
+    .float-drag-btn .iconfont {
+        font-size: 10px;
+    }
+}
+</style>

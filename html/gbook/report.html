@@ -1,0 +1,20 @@
+<div class="comment_form_box clearfix">
+    <div class="myui_comment_right">
+        <form class="comment_form clearfix" id="myform">
+            <input type="hidden" name="comment_pid" value="0">
+            <!--评论框-->
+            <div class="myui-comment__form clearfix">       	
+                <textarea class="comment_data form-control no-resize" name="gbook_content" rows="5" placeholder="最多可以输入200字符">{$param.name}</textarea>
+                <div class="comment_data_foot clearfix">
+                    <div class="pull-right">
+                        {if condition="$gbook.verify eq 1"}
+                        <img id="verify_img" src="{:url('verify/index')}" onClick="this.src=this.src+'?'"  alt="单击刷新" height="30" />	                
+                        &nbsp;&nbsp;<input class="form-control verify" type="text" id="verify" onkeydown="if(event.keyCode==13){event.keyCode=0;event.returnValue=false;}" name="verify" placeholder="验证码" />
+                        {/if}
+                    <a href="javascript:;" class="gbook_submit btn pull-right">发送</a>
+                    </div>
+                </div>	            
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,231 @@
+<footer class="site-footer">
+    <!-- 单行友情链接部分 -->
+    <div id="friendlink" class="friendlink-wrapper">
+        <div class="friendlink-content">
+            <span class="friendlink-title">友情链接：</span>
+            <div class="friendlink-links">
+                {maccms:link num="99" type="font"}
+                <a href="{$vo.link_url}" target="_blank" title="{$vo.link_name}">{$vo.link_name}</a>
+                <span class="link-separator">|</span>
+                {/maccms:link}
+            </div>
+        </div>
+    </div>
+    <div class="footer-container">
+        <!-- 左侧内容 -->
+        <div class="footer-left">
+            {$mzadydata.mzadycms.s1.sm}
+            {if condition="$mzadydata['mzadycms']['s2']['dbtop'] eq 1"}
+                <span class="space-line"></span><a target="_blank" href="{:mac_url('label/rank')}">排行榜</a>
+            {/if}
+        </div>
+        <!-- 右侧RSS相关链接 -->
+        <div class="footer-right">
+            <span class="rss-label">订阅：</span>
+            <a target="_blank" href="{:mac_url('rss/index')}">RSS</a><span class="space-line">|</span>
+            <a target="_blank" href="{:mac_url('rss/baidu')}">百度</a><span class="space-line">|</span>
+            <a target="_blank" href="{:mac_url('rss/bing')}">必应</a><span class="space-line">|</span>
+            <a target="_blank" href="{:mac_url('rss/so')}">360</a><span class="space-line">|</span>
+            <a target="_blank" href="{:mac_url('rss/sogou')}">搜狗</a><span class="space-line">|</span>
+            <a target="_blank" href="{:mac_url('rss/sm')}">神马</a>
+        </div>
+    </div>
+	{if condition="$mzadydata['mzadycms']['s4']['dbdm'] eq 1"}
+    {$mzadydata.mzadycms.s4.dbdmtips}
+<!--    {$maccms['site_tj']}-->	
+    {/if}
+</footer>
+<!--底部手机端导航开始-->
+<style>
+.site-footer {
+    padding-bottom: 60px; /* 根据导航栏高度调整 */
+}
+/*手机端导航*/
+.mzadywapdbfoot {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 5px 0 0;
+    z-index: 999;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    border-top: 1px solid;
+}
+
+.size20 {
+    font-size: 18px !important;
+    line-height: 0;
+}
+
+.mzadywapdbfoot .item {
+    display: block;
+    text-align: center;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
+}
+
+/* 当前选中项样式 - 同时影响图标和文字 */
+.mzadywapdbfoot .item.active,
+.mzadywapdbfoot .item.active .size20,
+.mzadywapdbfoot .item.active .grid-item-name {
+    font-weight: 500;
+    color: var(--theme-color) !important;
+}
+
+/* 浅色主题样式 */
+[data-theme="light"] .mzadywapdbfoot {
+    background: #fff;
+    border-top-color: #e0e0e0;
+}
+
+[data-theme="light"] .mzadywapdbfoot .item {
+    color: #333;
+}
+
+[data-theme="light"] .mzadywapdbfoot .grid-item-name {
+    color: #666;
+}
+
+/* 深色主题样式 */
+[data-theme="dark"] .mzadywapdbfoot {
+    background: #1e1e1e;
+    border-top-color: #333;
+}
+
+[data-theme="dark"] .mzadywapdbfoot .item {
+    color: #eee;
+}
+
+[data-theme="dark"] .mzadywapdbfoot .grid-item-name {
+    color: #aaa;
+}
+
+@media(min-width: 559px) {
+    .mzadywapdbfoot {
+        display:none !important;
+    }
+}
+/*手机端导航*/
+</style>
+{if condition="$mzadydata['mzadycms']['s5']['wapsydh'] eq 1"}
+<div class="mzadywapdbfoot">
+<a class="item {if !$GLOBALS['type_id']}active{/if}" href="{$maccms.path}">
+<i class="iconfont icon-home-filling size20"></i>
+<div class="grid-item-name" title="{$maccms.site_name}首页">首页</div>
+</a>
+{php}
+$type_id = $GLOBALS['type_pid'] ? $GLOBALS['type_pid'] : $GLOBALS['type_id'];
+{/php}
+{maccms:type order="asc" by="sort" ids="'.$mzadydata['mzadycms']['s5']['wapdaohangid'].'"}    
+<a class="item {if $vo.type_id eq $type_id}active{/if}" href="{:mac_url_type($vo)}">
+{if condition="$vo.type_id_1 eq $mzadydata.mzadycms.s5.wapnum1||$vo.type_id eq $mzadydata.mzadycms.s5.wapnum1"}
+<i class="size20 {$mzadydata.mzadycms.s5.wapicon1}"></i>
+{elseif condition="$vo.type_id_1 eq $mzadydata.mzadycms.s5.wapnum2||$vo.type_id eq $mzadydata.mzadycms.s5.wapnum2"}
+<i class="size20 {$mzadydata.mzadycms.s5.wapicon2}"></i>
+{elseif condition="$vo.type_id_1 eq $mzadydata.mzadycms.s5.wapnum3||$vo.type_id eq $mzadydata.mzadycms.s5.wapnum3"}
+<i class="size20 {$mzadydata.mzadycms.s5.wapicon3}"></i>
+{elseif condition="$vo.type_id_1 eq $mzadydata.mzadycms.s5.wapnum4||$vo.type_id eq $mzadydata.mzadycms.s5.wapnum4"}
+<i class="size20 {$mzadydata.mzadycms.s5.wapicon4}"></i>
+{elseif condition="$vo.type_id_1 eq $mzadydata.mzadycms.s5.wapnum5||$vo.type_id eq $mzadydata.mzadycms.s5.wapnum5"}
+<i class="size20 {$mzadydata.mzadycms.s5.wapicon5}"></i> 
+{else}
+<i class="size20 {$mzadydata.mzadycms.s5.wapiconmr}"></i>
+{/if}
+<div class="grid-item-name">{$vo.type_name}</div>
+</a>
+{/maccms:type}    
+
+{if condition="$mzadydata['mzadycms']['s5']['wapdiy1'] eq 1"}
+<a class="item {if $maccms.aid eq 'diy1'}active{/if}" href="{$mzadydata.mzadycms.s5.wapdiy1url}">
+<i class="size20 {$mzadydata.mzadycms.s5.wapdiy1icon}"></i>
+<div class="grid-item-name">{$mzadydata.mzadycms.s5.wapdiy1name}</div>
+</a>
+{/if}
+{if condition="$mzadydata['mzadycms']['s5']['wapdiy2'] eq 1"}
+<a class="item {if $maccms.aid eq 'diy2'}active{/if}" href="{$mzadydata.mzadycms.s5.wapdiy2url}">
+<i class="size20 {$mzadydata.mzadycms.s5.wapdiy2icon}"></i>
+<div class="grid-item-name">{$mzadydata.mzadycms.s5.wapdiy2name}</div>
+</a>
+{/if}
+</div>
+{/if}
+<!--底部手机端导航结束-->
+
+
+<div class="side-top">
+    <a class="svg-box" href="/">
+        <span class="iconfont icon-home-filling"></span>
+    </a>
+    
+    <a class="svg-box toggle" href="javascript:;" id="theme-switcher">
+        <span class="iconfont" id="theme-icon"></span>
+    </a>
+    <a class="backtop svg-box" href="javascript:;">
+        <span class="iconfont icon-gotop"></span>
+    </a>
+</div>
+{include file="public/ajax-login"}
+<script>
+    // 将PHP变量传递给JS
+    window.defaultDarkMode = {if $mzadydata['mzadycms']['s2']['mryj'] eq 1}1{else}0{/if};
+</script>
+
+
+
+<script>function updateInstallPrompt(){if(window.innerWidth<559){var installPrompt=document.querySelector('#install-prompt .kuangjia');if(installPrompt){installPrompt.innerHTML=`<img style="margin-right: 10px;"src="{$shoutu.basic.favicon}"width="32"height="32">安装到手机<div class="tooltip">?<span class="tooltiptext">将网站安装至桌面应用可以快速打开使用{$maccms.site_name}</span></div><button class="install-btn btn"onclick="addToDesktop()">立刻添加</button><span class="pwa-close-btn"onclick="closePrompt()">下次再说</span>`}}}document.addEventListener('DOMContentLoaded',function(){updateInstallPrompt();window.addEventListener('resize',updateInstallPrompt)});</script><script>var dfdPrompt=null;var installPromptDiv=document.getElementById('install-prompt');function shouldShowInstallPrompt(){const oneDay=168*60*60*1000;const lastClosed=localStorage.getItem('installPromptClosed');if(lastClosed){const now=Date.now();return now-lastClosed>oneDay}return true}function showInstallPrompt(){if(dfdPrompt&&shouldShowInstallPrompt()){installPromptDiv.style.display='block'}}function closePrompt(){installPromptDiv.style.display='none';localStorage.setItem('installPromptClosed',Date.now())}window.addEventListener('beforeinstallprompt',function(e){dfdPrompt=e;e.preventDefault();showInstallPrompt()});function addToDesktop(){if(dfdPrompt){dfdPrompt.prompt();dfdPrompt.userChoice.then(function(choiceResult){console.log(choiceResult.outcome);closePrompt();dfdPrompt=null})}else{console.log('添加到主屏幕的功能不可用。')}}window.onload=showInstallPrompt;</script>
+
+
+
+
+
+{if condition="$mzadydata['mzadycms']['s4']['anquanoff'] eq 1"}
+
+<script type="text/javascript">   
+	document.onkeydown=function(){
+	    
+		var e = window.event||arguments[0];
+		
+	     {if condition="$mzadydata['mzadycms']['s4']['shier'] eq 1"} 
+if(window.event&&window.event.keyCode==123){event.keyCode=0;event.returnValue=false;new Vue({data:function(){this.$notify({title:"{$mzadydata.mzadycms.s4.pbtips}",message:"你非要调试的话试试 Alt+Shift+Fn+F4",position:'bottom-right',offset:50,showClose:true,type:"error"});return{visible:false}}})
+				return false;
+			}
+        {/if}
+
+        {if condition="$mzadydata['mzadycms']['s4']['ctrl'] eq 1"} 
+if((event.ctrlKey)&&(event.shiftKey)&&(event.keyCode==73)){new Vue({data:function(){this.$notify({title:"{$mzadydata.mzadycms.s4.pbtips}",message:"老弟，好好看电影吧不要瞎调试换哟~",position:'bottom-right',offset:50,showClose:true,type:"error"});return{visible:false}}})
+			return false;
+		}
+if(e.ctrlKey&&window.event.keyCode==85){new Vue({data:function(){this.$notify({title:"{$mzadydata.mzadycms.s4.pbtips}",message:"老弟，在干嘛呢？好好看电影吧~",position:'bottom-right',offset:50,showClose:true,type:"error"});return{visible:false}}})
+		   return false;
+		}		
+if(event.ctrlKey&&window.event.keyCode==83){new Vue({data:function(){this.$notify({title:"{$mzadydata.mzadycms.s4.pbtips}",message:"看电影网页不需要保存哦~",position:'bottom-right',offset:50,showClose:true,type:"error"});return{visible:false}}})
+		   return false;
+		}
+        {/if}
+	}
+  {if condition="$mzadydata['mzadycms']['s4']['right'] eq 1"} 
+document.oncontextmenu = function (){new Vue({data:function(){this.$notify({title:"{$mzadydata.mzadycms.s4.pbtips}",message:"复制请用键盘快捷键 Ctrl+C",position:'bottom-right',offset:50,showClose:true,type:"warning"});return{visible:false}}})
+		return false;
+	}
+ {/if}
+  {if condition="$mzadydata['mzadycms']['s4']['mode'] eq 1"} 
+	var threshold = 160;
+	window.setInterval(function() {  
+	    if (window.outerWidth - window.innerWidth > threshold ||   
+	    window.outerHeight - window.innerHeight > threshold) {  
+			function disableDebugger() {
+				debugger;
+			}
+			$(document).ready(function () {
+				disableDebugger();
+			});
+	    }  
+	}, 1e3);
+ {/if}
+</script>
+ {/if}

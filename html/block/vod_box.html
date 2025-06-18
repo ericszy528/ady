@@ -1,0 +1,58 @@
+<div class="myui-vodbox-content">
+    <a href="{:mac_url_vod_detail($vo)}">
+        <div class="content-card">
+            <div class="card-img">
+                <div class="myui-vodlist__thumb cover-img">
+                    <!--<img src="{$vo.vod_pic|mac_url_img}" />-->
+                    <img src="{$vo.vod_pic|mac_url_img}" onerror="this.src='{:mac_url_img($mzadydata.mzadycms.s1.errorpic)}';this.onerror=null" alt="{$vo.vod_name}" />
+                </div>
+                <div class="bottom">
+                    <div class="info">
+                        <div class="hits">
+                            <svg fill="none" height="17" viewBox="0 0 16 17" width="16" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M6.34095 1.35864C6.08335 2.15996 5.38195 3.59989 3.47443 5.50957C0.183705 8.80812 -0.252398 14.1219 4.80374 16.7349C5.21885 16.9493 5.56535 16.8172 5.82575 16.5524C6.68676 15.6782 7.06056 14.3956 6.94856 12.7058C6.91706 12.2401 7.13056 12.1189 7.55336 12.4376C8.75247 13.3403 9.53508 14.7312 9.53508 16.2263C9.53508 16.7349 9.74438 17.0038 10.2323 16.9119C13.4565 16.3039 17.3856 11.8078 13.1513 5.22431C12.8979 4.88935 12.5234 4.88935 12.5297 5.34958C12.5367 5.91466 12.4702 6.47837 12.3309 7.02711C12.235 7.40837 11.8661 7.40292 11.7793 7.02711C11.2515 4.74025 9.78428 2.79652 7.37696 1.19252C6.72736 0.760205 6.49146 0.892964 6.34095 1.35932V1.35864Z"
+                                    fill="white" fill-opacity="0.6"></path>
+                            </svg>{$vo.vod_hits}</div>
+                        <div class="score">{$vo.vod_score}</div>
+                    </div>
+                </div>
+                <div class="tag-box">
+                    {if $vo.vod_remarks}<div class="tag text-overflow">{$vo.vod_remarks}</div>{/if}
+                </div>
+                {if date('Y-m-d', $vo.vod_time) == date('Y-m-d')}
+                    <div class="new-box">
+                        <div class="tag"></div>
+                    </div>
+                {/if}
+                <div class="hover-mask"></div>
+                <div class="vod-detail video-info">
+                    <div class="info-title-box">
+                        <div class="title">{$vo.vod_name}</div>
+                        <div class="score">{$vo.vod_score}</div>
+                    </div>
+                    <div class="info-time">更新时间：{$vo.vod_time|mac_friend_date}</div>
+                    <div class="info-roles">主演：{$vo.vod_actor|mac_default='未知'}</div>
+                    <div class="info-intro">
+                        简介：{$vo.vod_content}</div>
+                    <div class="info-bottom">
+                        <div class="hits">
+                            <svg fill="none" height="17" viewBox="0 0 16 17" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M6.34095 1.35864C6.08335 2.15996 5.38195 3.59989 3.47443 5.50957C0.183705 8.80812 -0.252398 14.1219 4.80374 16.7349C5.21885 16.9493 5.56535 16.8172 5.82575 16.5524C6.68676 15.6782 7.06056 14.3956 6.94856 12.7058C6.91706 12.2401 7.13056 12.1189 7.55336 12.4376C8.75247 13.3403 9.53508 14.7312 9.53508 16.2263C9.53508 16.7349 9.74438 17.0038 10.2323 16.9119C13.4565 16.3039 17.3856 11.8078 13.1513 5.22431C12.8979 4.88935 12.5234 4.88935 12.5297 5.34958C12.5367 5.91466 12.4702 6.47837 12.3309 7.02711C12.235 7.40837 11.8661 7.40292 11.7793 7.02711C11.2515 4.74025 9.78428 2.79652 7.37696 1.19252C6.72736 0.760205 6.49146 0.892964 6.34095 1.35932V1.35864Z" fill="white" fill-opacity="0.6"></path>
+                            </svg>{$vo.vod_score_all}
+                        </div>
+                        <div class="right">
+                            {$vo.vod_year}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-info">
+                <div>
+                    <div class="title">{$vo.vod_name}</div>
+                </div>
+                <div class="role">主演：{$vo.vod_actor}
+                </div>
+            </div>
+        </div>
+    </a>
+</div>

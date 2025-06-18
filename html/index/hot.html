@@ -1,0 +1,24 @@
+<div class="item">
+    <div class="myui-vodbox">
+        <div class="top">
+            <div class="left">
+                <div class="title iconfont icon-hotfill">{$mzadydata.mzadycms.s2.hottitle}</div>
+            </div>
+            <div class="right">
+                <div class="right_change randomBtn" data-list="#SliderList_0" data-api="{:mac_url('label/list_rand2')}">换一换<span class="iconfont icon-web-refresh-copy"></span></div>
+                <a href="{:mac_url('label/rank')}">
+                    <div class="more">更多<span class="iconfont icon-back more-icon"></span></div>
+                </a>
+            </div>
+        </div>
+        <div class="myui-vodbox-item">
+            <div class="content">
+                <div class="card-box" id="SliderList_0">
+                    {maccms:vod num="'.$mzadydata['mzadycms']['s2']['hotnum'].'" type="all" order="desc" by="'.$mzadydata['mzadycms']['s2']['hotlevels'].'"}<!--日点击量-->
+                    {include file="block/vod_box"}
+                    {/maccms:vod}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

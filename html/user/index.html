@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>会员中心 - {$maccms.site_name}</title>
+    <meta name="keywords" content="{$maccms.site_keywords}" />
+	<meta name="description" content="{$maccms.site_description}" />
+    {include file="user/include"}
+</head>
+
+<body>
+    {php}
+    $nav = 'index';
+    {/php}
+    {include file="public/header"}
+    <div class="container">
+        <div class="row">
+            <main class="user-info">
+                {include file="user/head"}
+                <aside class="right-side">
+                    <section class="tab">
+                        <ul>
+                            <li class="active">个人资料</li>
+                            <li class=""><a href="{:mac_url('user/info')}">修改信息</a></li>
+                        </ul>
+                    </section>
+                    <section class="content">
+                        <section>
+                            <div class="input-box">
+                                <span>用户名：</span>
+                                <input disabled="" value="{$obj.user_name}">
+                            </div>
+                            <div class="input-box">
+                                <span>注册信息：</span>
+                                <input disabled="" value="{$obj.user_reg_time|mac_day}">
+                            </div>
+                            <div class="input-box">
+                                <span>登录IP：</span>
+                                <input disabled="" value="{$obj.user_login_ip|long2ip}">
+                            </div>
+                            <div class="input-box">
+                                <span>登录时间：</span>
+                                <input disabled="" value="{$obj.user_login_time|mac_day}">
+                            </div>
+                        </section>
+                    </section>
+                </aside>
+            </main>
+        </div>
+    </div>
+    {include file="public/footer"}
+</body>
+
+</html>

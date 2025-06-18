@@ -1,0 +1,24 @@
+<div class="item">
+    <div class="myui-vodbox">
+        <div class="top">
+            <div class="left">
+                <div class="title">热门推荐</div>
+            </div>
+            <div class="right">
+                <div class="right_change randomBtn" data-list="#SliderList_0" data-page="1" data-api="{:mac_url('label/list_rand2',['type_id' => $obj['type_id']])}">换一换<span class="iconfont icon-web-refresh-copy"></span></div>
+                <a href="{:mac_url_type($obj,[],'show')}">
+                    <div class="more">更多<span class="iconfont icon-back more-icon"></span></div>
+                </a>
+            </div>
+        </div>
+        <div class="myui-vodbox-item">
+            <div class="content">
+                <div class="card-box" id="SliderList_0">
+                    {maccms:vod num="12" type="current" order="desc" by="hits"}
+                    {include file="block/vod_box"}
+                    {/maccms:vod}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

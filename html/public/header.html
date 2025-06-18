@@ -1,0 +1,242 @@
+<style>
+/* 电脑端导航间距调整 */
+.menu .nav {
+    margin: 2 8px!important;/* 调整这个数值控制左右间距，原值可能是15-20px */
+    padding: 0 10px!important; /* 内边距也可以微调 */
+}
+
+/* 手机端导航间距调整 */
+.tab_head .tab_item {
+    margin: 0 5px!important; /* 手机端间距一般要比电脑端小 */
+}
+</style>
+
+<header class="myui-header__top" {if $maccms.aid eq '14' || $maccms.aid eq '15'}id="play_header"{/if}>
+    <div class="row">
+        <div class="detail-top {if $maccms.aid eq 14 || $maccms.aid eq 15}header-show{/if}">
+            <span>
+                <a href="javascript:void(0);" onclick="history.back();">
+                    <i class="iconfont icon-back"></i>
+                </a>
+            </span>
+        </div>
+        <div class="menu {if $maccms.aid eq 14 || $maccms.aid eq 15}header-hide{/if}">
+            <a style="height:100%" href="/">
+                <div class="logo"><img src="{:mac_url_img($mzadydata.mzadycms.s1.logo1)}"></div>
+            </a>
+
+            <!--导航分类-->
+            <a href="/">
+                <div class="nav {if $maccms.aid eq 1}active{/if}">
+                    {if $mzadydata['mzadycms']['s2']['pcdhicon'] eq 1}<i class="iconfont icon-home-filling" style="margin-right: 2px;"></i>{/if}
+                    <span>首页</span>
+                </div>
+            </a>
+            {php} 
+            $type_id = $GLOBALS['type_pid'] ? $GLOBALS['type_pid'] : $GLOBALS['type_id'];
+            {/php}
+            {maccms:type ids="'.$mzadydata['mzadycms']['s2']['daohangid'].'" mid="1" order="asc" by="sort"}
+            <a href="{:mac_url_type($vo)}">
+                <div class="nav {if $vo.type_id eq $type_id}active{/if}">
+                    {if $mzadydata['mzadycms']['s2']['pcdhicon'] eq 1}
+                        {if $vo.type_id_1 eq $mzadydata.mzadycms.s2.num1||$vo.type_id eq $mzadydata.mzadycms.s2.num1}
+                            <i class="{$mzadydata.mzadycms.s2.icon1}" style="margin-right: 2px;"></i>
+                        {elseif $vo.type_id_1 eq $mzadydata.mzadycms.s2.num2||$vo.type_id eq $mzadydata.mzadycms.s2.num2}
+                            <i class="{$mzadydata.mzadycms.s2.icon2}" style="margin-right: 2px;"></i>
+                        {elseif $vo.type_id_1 eq $mzadydata.mzadycms.s2.num3||$vo.type_id eq $mzadydata.mzadycms.s2.num3}
+                            <i class="{$mzadydata.mzadycms.s2.icon3}" style="margin-right: 2px;"></i>
+                        {elseif $vo.type_id_1 eq $mzadydata.mzadycms.s2.num4||$vo.type_id eq $mzadydata.mzadycms.s2.num4}
+                            <i class="{$mzadydata.mzadycms.s2.icon4}" style="margin-right: 2px;"></i>
+                        {elseif $vo.type_id_1 eq $mzadydata.mzadycms.s2.num5||$vo.type_id eq $mzadydata.mzadycms.s2.num5}
+                            <i class="{$mzadydata.mzadycms.s2.icon5}" style="margin-right: 2px;"></i>
+                        {elseif $vo.type_id_1 eq $mzadydata.mzadycms.s2.num6||$vo.type_id eq $mzadydata.mzadycms.s2.num6}
+                            <i class="{$mzadydata.mzadycms.s2.icon6}" style="margin-right: 2px;"></i>
+                        {elseif $vo.type_id_1 eq $mzadydata.mzadycms.s2.num7||$vo.type_id eq $mzadydata.mzadycms.s2.num7}
+                            <i class="{$mzadydata.mzadycms.s2.icon7}" style="margin-right: 2px;"></i>
+                        {else}
+                            <i class="{$mzadydata.mzadycms.s2.iconmr}" style="margin-right: 2px;"></i>
+                        {/if}
+                    {/if}
+                    <span>{$vo.type_name}</span>
+                </div>
+            </a>
+            {/maccms:type}
+            
+            <!--导航结束-->
+
+            
+            
+        </div>
+        <div class="search">
+            <div class="search-box">
+                <form id="search" method="get" name="search" action="{:mac_url('vod/search')}" onSubmit="return qrsearch();" style="display: flex;">
+                    <input type="text" name="wd" placeholder="{$mzadydata.mzadycms.s1.searchwd}" value="{$param.wd}" class="search-field" style="flex: 1; margin-right: 10px;" autocomplete="off" />
+                    <button type="submit" id="search_btn" style="padding: 0 15px;"><span class="iconfont icon-search"></span></button>
+                </form>
+
+
+                <div class="hot-recommend-box hidden">
+                    <!-- 新增的关闭按钮 -->
+                    <div class="recommend-close-btn" id="close-recommend-box">
+                        <i class="iconfont icon-close"></i>
+                    </div>
+                    <div class="search-history-box">
+                        <div class="search-history-title">搜索历史
+                            <div class="clear-icon" id="clear-search-history">
+                                <i class="iconfont icon-del"></i>
+                            </div>
+                        </div>
+                        <div class="search-history"></div>
+                    </div>
+
+                    <div class="hot-search-box">
+                        <div class="hot-search-title">热门搜索：</div>
+                        <div class="hot-search-list">
+                            {maccms:foreach name=":explode(',',''.$maccms['search_hot'].'')" id="vo" key="key"}
+                            <div class="item">
+                                <div class="nums"><span class="num">{$key+1}</span><span class="rankBg"></span></div>
+                                <a href="{:mac_url('vod/search',['wd'=>$vo])}" title="{$vo}">
+                                    <div class="title">{$vo}</div>
+                                </a>
+                            </div>
+                            {/maccms:foreach}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--电脑端APP下载-->
+            {if condition="$mzadydata['mzadycms']['s2']['APP1_on'] eq 1"}
+            <div class="icons icon3 hidden-md hidden-xs">
+                <a class="link" rel="nofollow" href="{$mzadydata.mzadycms.s2.APP1_url}" target="_blank">
+                    <span class="{$mzadydata.mzadycms.s2.APP1_ico}"></span>
+                    <div class="iconName" style="font-weight: bold;">{$mzadydata.mzadycms.s2.APP1_text2}</div>
+                    <div class="qiupianBg" style="font-weight: bold;">{$mzadydata.mzadycms.s2.APP1_text1}</div><!--右上角-->
+                </a>
+            </div>
+            {/if}
+            <!--电脑端APP下载-->
+            <div class="icons icon1 hidden-md hidden-xs">
+                <a class="link" href="{:mac_url('label/rank')}">
+                    <span class="iconfont icon-ranking"></span>
+                    <div class="iconName" style="font-weight: bold;">排行榜</div>
+                </a>
+            </div>
+            <div class="icons icon2 hidden-md hidden-xs">
+                <span class="iconfont icon-history"></span>
+                <div class="iconName" style="font-weight: bold;">历史</div>
+                <div class="dropdownBox fadeInDown dropBoxHidden">
+                    <div class="history-box">
+                        <div class="title"><span>播放记录</span></div>
+                        <div class="list">
+                            <script type="text/javascript">
+                                var history_get = MyTheme.Cookie.Get("history");
+                                if (history_get) {
+                                    var json = eval("(" + history_get + ")");
+                                    for (i = 0; i < json.length; i++) {
+                                        document.write("<a rel='nofollow' href='" + json[i].link + "'><div islight='light' class='desc'><div class='name'>" + json[i].name + "</div><div class='type'>" + json[i].remarks + "</div></div></a>");
+                                    }
+                                }
+                                else {
+                                    document.write("您还没有看过影片哦");
+                                }
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="icons icon3 hidden-md hidden-xs">
+                <a class="link" rel="nofollow" href="{:mac_url('gbook/index')}">
+                    <span class="iconfont icon-msg2"></span>
+                    <div class="iconName" style="font-weight: bold;">求片</div>
+                    <div class="qiupianBg" style="font-weight: bold;">求片</div>
+                </a>
+            </div>
+            {if condition="$mzadydata['mzadycms']['s2']['user'] eq 1"}
+            {if $user.group.group_id eq 1}
+            <div class="icons icon5">
+                <a href="{:mac_url('user/login')}">
+                    <div class="image"style="font-weight: bold;">登录</div>
+                </a>
+            </div>
+            {else}
+            <div class="icons icon5 islogin">
+                <a href="{:mac_url('user/index')}">
+                    <div class="image"></div>
+                    <div class="dropdownBox fadeInDown dropBoxHidden">
+                        <div class="user-menu"><a class="link" href="{:mac_url('user/index')}"><span class="iconfont icon-user"></span>
+                                <div>个人中心</div>
+                            </a></div>
+                        <div class="user-menu"><a class="link" href="{:mac_url('user/favs')}"><span class="iconfont icon-list"></span>
+                                <div>我的收藏</div>
+                            </a></div>
+                        <div class="user-menu"><a class="link" href="{:mac_url('user/plays')}"><span class="iconfont icon-list2"></span>
+                                <div>播放记录</div>
+                            </a></div>
+                        <div class="user-menu"><a class="link logout" href="{:mac_url('user/logout')}"><span>退出</span></a></div>
+                    </div>
+                </a>
+            </div>
+            {/if}
+             {/if}
+        </div>
+    </div>
+<div class="main_nav {if $maccms.aid eq '14' || $maccms.aid eq '15'}hidden-xs{else}visible-xs{/if}">
+    <ul class="tab_head">
+        <li class="tab_item">
+            <a href="/">
+                <div class="nav {if !$GLOBALS['type_id']}active{/if}">
+                    {if $mzadydata['mzadycms']['s2']['pcdhicon'] eq 1}<i class="iconfont icon-home-filling" style="margin-right: 2px;"></i>{/if}
+                    <span>首页</span>
+                </div>
+            </a>
+        </li>
+        {php} 
+        $type_id = $GLOBALS['type_pid'] ? $GLOBALS['type_pid'] : $GLOBALS['type_id'];
+        {/php}
+        {maccms:type ids="'.$mzadydata['mzadycms']['s2']['daohangid'].'" mid="1" order="asc" by="sort"}
+        <li class="tab_item">
+            <a href="{:mac_url_type($vo)}">
+                <div class="nav {if $vo.type_id eq $GLOBALS['type_id']}active{/if}">
+                    {if $mzadydata['mzadycms']['s2']['pcdhicon'] eq 1}
+                        {if $vo.type_id_1 eq $mzadydata.mzadycms.s2.num1||$vo.type_id eq $mzadydata.mzadycms.s2.num1}
+                            <i class="{$mzadydata.mzadycms.s2.icon1}" style="margin-right: 2px;"></i>
+                        {elseif $vo.type_id_1 eq $mzadydata.mzadycms.s2.num2||$vo.type_id eq $mzadydata.mzadycms.s2.num2}
+                            <i class="{$mzadydata.mzadycms.s2.icon2}" style="margin-right: 2px;"></i>
+                        {elseif $vo.type_id_1 eq $mzadydata.mzadycms.s2.num3||$vo.type_id eq $mzadydata.mzadycms.s2.num3}
+                            <i class="{$mzadydata.mzadycms.s2.icon3}" style="margin-right: 2px;"></i>
+                        {elseif $vo.type_id_1 eq $mzadydata.mzadycms.s2.num4||$vo.type_id eq $mzadydata.mzadycms.s2.num4}
+                            <i class="{$mzadydata.mzadycms.s2.icon4}" style="margin-right: 2px;"></i>
+                        {elseif $vo.type_id_1 eq $mzadydata.mzadycms.s2.num5||$vo.type_id eq $mzadydata.mzadycms.s2.num5}
+                            <i class="{$mzadydata.mzadycms.s2.icon5}" style="margin-right: 2px;"></i>
+                        {elseif $vo.type_id_1 eq $mzadydata.mzadycms.s2.num6||$vo.type_id eq $mzadydata.mzadycms.s2.num6}
+                            <i class="{$mzadydata.mzadycms.s2.icon6}" style="margin-right: 2px;"></i>
+                        {elseif $vo.type_id_1 eq $mzadydata.mzadycms.s2.num7||$vo.type_id eq $mzadydata.mzadycms.s2.num7}
+                            <i class="{$mzadydata.mzadycms.s2.icon7}" style="margin-right: 2px;"></i>
+                        {else}
+                            <i class="{$mzadydata.mzadycms.s2.iconmr}" style="margin-right: 2px;"></i>
+                        {/if}
+                    {/if}
+                    <span>{$vo.type_name}</span>
+                </div>
+            </a>
+        </li>
+        {/maccms:type}
+        <!--  - 手机端APP下载 -->
+        {if condition="$mzadydata['mzadycms']['s2']['APP1_on'] eq 1"}
+        <li class="tab_item">
+           <a class="link" rel="nofollow noopener noreferrer" href="{$mzadydata.mzadycms.s2.APP1_url}" target="_blank">
+                <div class="nav">
+                 <i class="{$mzadydata.mzadycms.s2.APP1_ico}" style="margin-right: 2px;"></i>
+                    <span>{$mzadydata.mzadycms.s2.APP1_text2}</span>
+                </div>
+            </a>
+        </li>
+         {/if}
+         <!--  - 手机端APP下载 -->
+    </ul>
+</div>
+    </ul>
+</div>
+</header>
+
+<script>$(function(){var a=$('.search-field'),b=$('.hot-recommend-box'),c=$('#search'),d=!1;if(window.innerWidth<800){$('.search-box').wrap('<a href="{:mac_url(\"label/search\")}"></a>');return}a.on('focus click',function(){b.removeClass('hidden').addClass('visible');e()}),b.hover(function(){d=!0},function(){d=!1}),$('#close-recommend-box').on('click',function(f){f.stopPropagation(),b.removeClass('visible').addClass('hidden')}),$(document).on('click',function(f){$(f.target).closest('.search-box').length||$(f.target).closest('.hot-recommend-box').length||b.removeClass('visible').addClass('hidden')}),$('#clear-search-history').on('click',function(f){f.preventDefault(),f.stopPropagation(),g()}),c.on('submit',function(f){var h=a.val().trim();return h?(i(h),!0):(f.preventDefault(),a.attr('placeholder','请输入搜索影片').addClass('shake'),setTimeout(function(){a.removeClass('shake')},500),!1)}),$('.hot-search-list').on('click','.item a',function(f){i($(this).attr('title')||$(this).find('.title').text().trim())});function e(){var f=localStorage.getItem('searchHistory');f&&(f=JSON.parse(f),$('.search-history').html(f.map(function(g){return'<a href="{:mac_url(\"vod/search\")}?wd='+encodeURIComponent(g)+'">'+g+'</a>'}).join('')))}function i(f){if(f){var g=localStorage.getItem('searchHistory');g=JSON.parse(g)||[];var h=g.indexOf(f);-1!==h&&g.splice(h,1),g.unshift(f),g.length>10&&(g=g.slice(0,10)),localStorage.setItem('searchHistory',JSON.stringify(g))}}function g(){localStorage.removeItem('searchHistory'),$('.search-history').empty()}e(),$(document).on('keydown',function(f){27===f.keyCode&&b.removeClass('visible').addClass('hidden')})});</script>

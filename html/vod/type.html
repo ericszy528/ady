@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    {include file="public/include"}
+</head>
+<body class="type">
+    {include file="public/header"}
+    <main>
+        <div class="container">
+            {include file="block/vod_slide"}
+            <div class="row type-list">
+                <div class="category-box hidden-md hidden-xs">
+					<div class="item">
+                        <a href="{:mac_url_type($obj,[],'show')}">
+                            <div class="head">
+                                <span class="iconfont iconfont icon-duanju"></span>
+                                <div class="name">{$obj.type_name}</div>
+                            </div>
+                        </a>
+                        <div class="content">
+                        {maccms:type parent="'.$obj['type_id'].'" order="asc" id="vo2" key="key2" num="10"}
+                            <a href="{:mac_url_type($vo2,[],'show')}">{$vo2.type_name}</a>
+                        {/maccms:type}
+                        </div>
+                    </div>
+                </div>
+				{include file="block/vod_hot"}
+				{include file="block/vod_new"}
+				{maccms:type parent="'.$obj['type_id'].'" order="asc" by="sort" id="for" key="key2"}
+                {include file="block/vod_list1"}
+                {/maccms:type}
+            </div>
+        </div>
+    </main>
+    {include file="public/footer"}
+</body>
+
+</html>

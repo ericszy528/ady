@@ -1,0 +1,24 @@
+<div class="item">
+    <div class="myui-vodbox">
+        <div class="top">
+            <div class="left">
+                <div class="title">{$for.type_name}</div>
+            </div>
+            <div class="right">
+                <div class="right_change randomBtn" data-list="#SliderList_ty{$key2}" data-page="1" data-api="{:mac_url('label/list_new',['type_id' => $for['type_id']])}">换一换<span class="iconfont icon-web-refresh-copy"></span></div>
+                <a href="{:mac_url_type($for,[],'show')}">
+                    <div class="more">更多<span class="iconfont icon-back more-icon"></span></div>
+                </a>
+            </div>
+        </div>
+        <div class="myui-vodbox-item">
+            <div class="content">
+                <div class="card-box" id="SliderList_ty{$key2}">
+                    {maccms:vod num="12" type="'.$for['type_id'].'" order="desc" by="time" id="vo" key="key"}
+                    {include file="block/vod_box"}
+                    {/maccms:vod}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

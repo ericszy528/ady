@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    {include file="public/include"}
+</head>
+<body style="padding-top: 60px;">
+<header class="myui-header__top" id="play_header">
+    <div class="row">
+        <div class="detail-top header-show">
+            <span>
+                <a href="javascript:void(0);" onclick="history.back();">
+                    <i class="iconfont icon-back"></i>
+                </a>
+            </span>
+        </div>
+        <div class="search">
+            <div class="search-box">
+                <form id="search" method="get" name="search" action="{:mac_url('vod/search')}">
+                    <input type="text" name="wd"  placeholder="{$mzadydata.mzadycms.s1.searchwd}" value="{$param.wd}" class="search-field"/>
+                    <button type="submit" id="search_btn"><span class="iconfont icon-search"></span></button>
+                </form>
+            </div>
+            {if condition="$user.group.group_id eq 1"}
+            <div class="icons icon5">
+            <a href="{:mac_url('user/login')}">
+                    <div class="image">登录</div>
+                </a>
+            </div>
+            {else} 
+            <div class="icons icon5 islogin">
+                <a href="{:mac_url('user/index')}" >
+                    <div class="image"></div>
+                    <div class="dropdownBox fadeInDown dropBoxHidden">
+                        <div class="user-menu"><a class="link" href="{:mac_url('user/index')}"><span class="iconfont icon-user "></span><div>个人中心</div></a></div>
+                        <div class="user-menu"><a class="link" href="{:mac_url('user/favs')}"><span class="iconfont icon-list "></span><div>我的收藏</div></a></div>
+                        <div class="user-menu"><a class="link" href="{:mac_url('user/plays')}"><span class="iconfont icon-list2 "></span><div>播放记录</div></a></div>
+                        <div class="user-menu"><a class="link logout" href="{:mac_url('user/logout')}"><span>退出</span></a></div>
+                    </div>
+                </a>
+            </div>
+            {/if}
+        </div>
+    </div>
+</header>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="search-item">
+                    <div class="search-item-box">
+                        <span>搜索历史</span>
+                        <span id="clear-search-history"><div class="clear-icon"><i class="iconfont icon-del"></i></div>清空</span>
+                    </div>
+                    <div class="search-history"></div>
+                </div>
+                <div class="search-item">
+                    <div class="search-item-box">
+                        <span>热门搜索</span>
+                    </div>
+                    <div class="hot-search-list" len="6">
+                        {maccms:foreach name=":explode(',',$maccms.search_hot)" id="vo" key="key"}
+                        <div class="item">
+                            <div class="nums"><span class="num">{$key+1}</span><span class="rankBg"></span></div>
+                            <a href="{:mac_url('vod/search',['wd'=>$vo])}" title="{$vo}">
+                                <div class="title">{$vo}</div>
+                            </a>
+                        </div>
+                        {/maccms:foreach}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    {include file="public/footer"}
+</body>
+
+</html>

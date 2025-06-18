@@ -1,0 +1,110 @@
+<div class="player-foot hidden-xs">
+    <div class="data">
+        <div class="item">
+           <a class="digg_link btn btn-default" data-id="{$obj.vod_id}{$obj.art_id}{$obj.topic_id}" data-mid="{$maccms.mid}" data-type="up" href="javascript:;">
+            <div class="item-icon" title="点赞"><svg fill="none"
+                    height="20" viewBox="0 0 20 20" width="20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M17.2055 7.55102H13.2035C12.9071 7.50437 12.8083 7.22449 12.7588 7.08455V3.6793C12.7588 2.74636 11.9683 2 10.9802 2C10.0909 2 9.34977 2.65306 9.20155 3.44606C8.65807 6.66472 6.58298 7.73761 5.24899 8.06414C5.2984 8.20408 5.2984 8.29738 5.2984 8.39067V17.4402C5.2984 17.6268 5.24899 17.8134 5.15018 18H14.8339C15.7727 17.8134 16.415 17.4869 16.8596 16.6006L18.8853 9.88338C19.2806 8.67055 18.6383 7.50437 17.2055 7.55102ZM4.45848 17.4869V8.39067C4.45848 8.11079 4.06323 7.87755 3.61857 7.87755H2.28458C1.59288 7.87755 1 8.43732 1 9.09038V16.7405C1 17.4402 1.54348 18 2.28458 18H3.61857C4.06323 18 4.45848 17.7668 4.45848 17.4869Z"
+                        fill="white" fill-opacity="0.4"></path>
+                </svg><span class="digg_num">{$obj.vod_up}{$obj.art_up}{$obj.topic_up}</span></div>
+            </a>
+        </div>
+        <div class="item">
+            <a class="digg_link" data-id="{$obj.vod_id}{$obj.art_id}{$obj.topic_id}" data-mid="{$maccms.mid}" data-type="down" href="javascript:;">
+            <div class="item-icon" title="点踩"><svg fill="none"
+                    height="20" viewBox="0 0 20 20" width="20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M17.2055 12.449H13.2035C12.9071 12.4956 12.8083 12.7755 12.7588 12.9155V16.3207C12.7588 17.2536 11.9683 18 10.9802 18C10.0909 18 9.34977 17.3469 9.20155 16.5539C8.65807 13.3353 6.58298 12.2624 5.24899 11.9359C5.2984 11.7959 5.2984 11.7026 5.2984 11.6093V2.55977C5.2984 2.37318 5.24899 2.18659 5.15018 2H14.8339C15.7727 2.18659 16.415 2.51312 16.8596 3.39942L18.8853 10.1166C19.2806 11.3294 18.6383 12.4956 17.2055 12.449ZM4.45848 2.51312V11.6093C4.45848 11.8892 4.06323 12.1224 3.61857 12.1224H2.28458C1.59288 12.1224 1 11.5627 1 10.9096V3.25948C1 2.55977 1.54348 2 2.28458 2H3.61857C4.06323 2 4.45848 2.23324 4.45848 2.51312Z"
+                        fill="white" fill-opacity="0.4"></path>
+                </svg><span class="digg_num">{$obj.vod_down}{$obj.art_down}{$obj.topic_down}</span>
+            </div>
+            </a>
+        </div>
+        {if condition="$mzadydata['mzadycms']['s2']['comment'] eq 1"}
+        <div class="item">
+            <a href="#comment-box">
+            <div class="item-icon" title="评论"><svg fill="none"
+                    height="20" viewBox="0 0 20 20" width="20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M15.9055 3H4.17022C2.96454 3 2 3.95094 2 5.13961V13.5395C2 14.7282 2.96454 15.7584 4.17022 15.7584H6.01892L6.82271 17.6603C6.98347 18.0565 7.54611 18.1357 7.78725 17.7395L9.23406 15.7584H15.8251C17.0308 15.7584 17.9953 14.8075 17.9953 13.5395V5.13961C18.0757 3.95094 17.1112 3 15.9055 3ZM5.45627 10.5282C4.89362 10.5282 4.49173 10.0528 4.49173 9.49806C4.49173 8.94335 4.974 8.46788 5.45627 8.46788C5.93854 8.46788 6.42082 8.94335 6.42082 9.49806C6.42082 10.132 6.01892 10.5282 5.45627 10.5282ZM10.0378 10.5282C9.4752 10.5282 9.0733 10.0528 9.0733 9.49806C9.0733 8.94335 9.55558 8.46788 10.0378 8.46788C10.5201 8.46788 11.0024 8.94335 11.0024 9.49806C11.0024 10.132 10.6005 10.5282 10.0378 10.5282ZM14.6194 10.5282C14.0568 10.5282 13.6549 10.0528 13.6549 9.49806C13.6549 8.94335 14.1371 8.46788 14.6194 8.46788C15.1017 8.46788 15.584 8.94335 15.584 9.49806C15.6643 10.132 15.1821 10.5282 14.6194 10.5282Z"
+                        fill="white" fill-opacity="0.4"></path>
+                </svg><span>评论</span>
+            </div>
+            </a>
+        </div>
+        {/if}
+        {if condition="$mzadydata['mzadycms']['s2']['shoucang'] eq 1"}
+        <div class="item">
+            {if condition="$maccms.user_status eq 1"}
+            {if condition="$user.group.group_id eq 1"}
+            <a class="favorite" href="javascript:;" onclick="Myui.User.Login();">
+                <div class="item-icon" title="收藏"><svg fill="none"
+                        height="20" viewBox="0 0 20 20" width="20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M13.8875 3C12.1918 3 10.7193 3.86179 10 5.11619C9.28074 3.86179 7.8083 3 6.11303 3C3.53833 3 2 5.20573 2 7.33831C2 12.3885 9.44772 16.7534 9.76482 16.9369C9.83758 16.979 9.91856 17 10 17C10.0814 17 10.1624 16.979 10.2352 16.9369C10.5523 16.7535 18 12.3885 18 7.33831C18 5.20573 16.4617 3 13.8875 3Z"
+                            fill="white" fill-opacity="0.4"></path>
+                    </svg><span>收藏</span>
+                </div>
+                </a>
+            {else}
+            <a class="favorite" href="javascript:;" data-type="2" data-mid="{$maccms.mid}" data-id="{$obj.vod_id}">
+                <div class="item-icon" title="收藏"><svg fill="none"
+                        height="20" viewBox="0 0 20 20" width="20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M13.8875 3C12.1918 3 10.7193 3.86179 10 5.11619C9.28074 3.86179 7.8083 3 6.11303 3C3.53833 3 2 5.20573 2 7.33831C2 12.3885 9.44772 16.7534 9.76482 16.9369C9.83758 16.979 9.91856 17 10 17C10.0814 17 10.1624 16.979 10.2352 16.9369C10.5523 16.7535 18 12.3885 18 7.33831C18 5.20573 16.4617 3 13.8875 3Z"
+                            fill="white" fill-opacity="0.4"></path>
+                    </svg><span>收藏</span>
+                </div>
+                </a>
+            {/if}
+            {/if}
+        </div>
+        {/if}
+        <div class="item">
+            <a class="btn btn-default" href="{:mac_url('gbook/index')}?id={$obj.vod_id}&name=【{$obj.vod_name}】不能观看请检查修复，页面地址{:mac_url_vod_play($obj,['sid'=>$param['sid'],'nid'=>$param['nid']])}">
+            <div class="item-icon" title="报错"><svg fill="none"
+                    height="20" viewBox="0 0 20 20" width="20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path clip-rule="evenodd"
+                        d="M17.5 10C17.5 14.1421 14.1421 17.5 10 17.5C5.85786 17.5 2.5 14.1421 2.5 10C2.5 5.85786 5.85786 2.5 10 2.5C14.1421 2.5 17.5 5.85786 17.5 10ZM10 5.83333C10.4602 5.83333 10.8333 6.20643 10.8333 6.66667V10.8333C10.8333 11.2936 10.4602 11.6667 10 11.6667C9.53976 11.6667 9.16667 11.2936 9.16667 10.8333V6.66667C9.16667 6.20643 9.53976 5.83333 10 5.83333ZM10.8333 13.3333C10.8333 12.8731 10.4602 12.5 10 12.5C9.53976 12.5 9.16667 12.8731 9.16667 13.3333C9.16667 13.7936 9.53976 14.1667 10 14.1667C10.4602 14.1667 10.8333 13.7936 10.8333 13.3333Z"
+                        fill="#9BA7BD" fill-rule="evenodd"></path>
+                </svg><span>报错</span>
+            </div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="javascript:;" onclick="Myui.Share({$obj.vod_id});">
+            <div class="item-icon" title="分享">
+                <svg fill="none"
+                    height="20" viewBox="0 0 20 20" width="20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M16.5711 8.01805L11.8092 2.7986C11.6187 2.6088 11.333 2.6088 11.1425 2.7986C10.9521 2.9884 10.9521 3.0833 10.9521 3.27309V6.02517C7.04729 6.02517 3.33301 9.25174 3.33301 13.1426C3.33301 14.1865 3.8092 15.5151 4.28539 15.9896C4.85682 13.0477 7.8092 10.7701 10.9521 10.7701C10.9521 11.0548 10.9521 13.6171 10.9521 13.6171C10.9521 13.712 10.9521 13.8069 11.0473 13.9967C11.2378 14.1865 11.6187 14.0916 11.714 13.9967L16.4759 8.87215C16.6663 8.68235 16.6663 8.49255 16.6663 8.39765C16.6663 8.30275 16.6663 8.11295 16.5711 8.01805Z"
+                        fill="white" fill-opacity="0.4"></path>
+                </svg>
+                <span>分享</span></div>
+            </a>
+        </div>
+        <div class="item hidden-md">
+            <a {if condition="$param.nid eq 1"} class="disabled"{/if} href="{$obj.player_info.link_pre}">
+                <div class="item-icon" title="上集">
+                    <?xml version="1.0" encoding="UTF-8"?><svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M31 36L19 24L31 12" stroke="" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>上集</span>
+                </div>
+            </a>
+        </div>
+        <div class="item hidden-md">
+            <a {if condition="$param.nid eq $obj['vod_play_list'][$param['sid']]['url_count']"} class="disabled"{/if} href="{$obj.player_info.link_next}">
+            <div class="item-icon" title="下集">
+                <?xml version="1.0" encoding="UTF-8"?><svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 12L31 24L19 36" stroke="" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>下集</span>
+            </div>
+            </a>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<style type="text/css">
+:root{
+    --theme-color: {$mzadydata.mzadycms.s1.themecolor}; 
+    --theme-high: 133%;
+    --theme-highwide: 56%;
+    --theme-radius: 6px;
+    --bg-light: url({$mzadydata.mzadycms.s2.zztuijianlight});
+    --bg-dark: url({$mzadydata.mzadycms.s2.zztuijiandark});
+    --userbg-light: url({$mzadydata.mzadycms.s1.loginpic});
+    --userbg-dark: url({$mzadydata.mzadycms.s1.regpic});
+    --gonggao_speed: {$mzadydata.mzadycms.s2.gonggao_speed}; 
+}
+.layui-layer-rim{ overflow: auto; -ms-overflow-style: none; /* IE and Edge */ scrollbar-width: none; /* Firefox */ border: 0; border-radius: 16px;} 
+.layui-layer-content::-webkit-scrollbar { display: none; /* Chrome, Safari, and Opera */ } 
+.layui-layer-content{ border-radius: 16px; } 
+.layui-layer-setwin .layui-layer-close2 { right: -8px; top: -8px; }
+.layui-layer{background: var(--basic-bg);}
+.layui-layer-content{color: var(--font-color);}
+</style>
+<!--后台自定义CSS-->
+{if condition="$mzadydata['mzadycms']['s4']['stylediy'] eq 1"}
+<style>
+  {$mzadydata.mzadycms.s4.stylecss}  
+</style>
+{/if}

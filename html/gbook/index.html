@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+	{include file="public/include"}
+	<script>
+
+    </script>
+</head>
+<body>
+    {include file="public/header"}
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="comment-box">
+                    <div class="title">
+                        <span class="iconfont icon-msg3 pinglun-icon"></span>我要留言
+                    </div>
+                    <div class="comment-body">
+                        <div class="myui_comment">
+                            {include file="gbook/report"} 
+                            <div class="col-xs-1 p0 pt10">
+                                {maccms:gbook num="10" paging="yes" order="desc" by="id"}
+                                <div class="styu-message__list comment  clearfix">
+                                    <div class="avatar">
+                                        <a href="javascript:;"><img class="face" src="__STATIC__/images/home/duface.png" width="45" height="45"></a> 
+                                    </div>
+                                    <div class="data">
+                                        
+                                        <h5 class="name"><a class="font-fff mr10" href="javascript:;">{$vo.gbook_name}</a><span class="text-light-grey-7">{$vo.gbook_time|date='Y-m-d',###}</span></h5>
+                                        <p class="content text-grey-7">{$vo.gbook_content}</p>
+                                        {if condition="$vo.gbook_reply_time gt 0"}
+                                        <p class="text-muted"><span class="text-red">管理员： {$vo.gbook_reply}（{$vo.gbook_reply_time|date='Y-m-d',###}）</span></p>
+                                        {/if}
+                                    </div>
+                                </div> 
+                                {/maccms:gbook}	
+                         </div>
+                         {include file="public/page"}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    {include file="public/footer"}
+</body>
+</html>

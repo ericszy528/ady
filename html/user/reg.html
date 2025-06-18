@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>用户注册 - {$maccms.site_name}</title>
+    <meta name="keywords" content="{$maccms.site_keywords}" />
+	<meta name="description" content="{$maccms.site_description}" />
+    {include file="user/include"/}
+</head>
+
+<body style="padding-top: 0;">
+<div class="hidden-sm hidden-xs">
+    {include file="public/header"}
+</div>
+<div class="back-icon-box visible-sm visible-xs">
+    <span>
+        <a href="javascript:void(0);" onclick="history.back();">
+            <i class="iconfont icon-back"></i>
+        </a>
+    </span>
+</div>
+<main>
+    <div class="container">
+        <div class="login-box">
+            <div class="box-login-bg box-reg-bg">
+                <div class="close-box hidden-xs hidden-sm">
+                    <a href="javascript:void(0);" onclick="history.back();">
+                        <?xml version="1.0" encoding="UTF-8"?><svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" fill="none" stroke="#a5a5a5" stroke-width="4" stroke-linejoin="round"/><path d="M29.6567 18.3432L18.343 29.6569" stroke="#a5a5a5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.3433 18.3432L29.657 29.6569" stroke="#a5a5a5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </a>
+                </div>
+                <img alt="{$maccms.site_name}" class="login-box-logo" src="{$mzadydata.mzadycms.s1.logo1}" />
+                <div class="login-box-title">注册新账号</div>
+                <form method="post" id="fm" action="">	
+                    <input id="user_name" name="user_name" placeholder="请输入您的注册账号" class="login-input" />
+                    <input id="user_pwd" name="user_pwd" placeholder="请输入您的注册密码" type="password" class="login-input" />
+                    <input id="user_pwd2" name="user_pwd2" placeholder="请输入您的确认密码" type="password" class="login-input" />
+                    {if condition="$GLOBALS['config']['user']['login_verify'] eq 1"}
+                    <div class="login-verify">
+                        <img class="pull-right" id="verify_img" src="{:mac_url('verify/index')}" onClick="this.src=this.src+'?'"  alt="单击刷新" />
+                        <input type="text" class="login-input" id="verify" name="verify" placeholder="请输入验证码">	
+                    </div>
+                    {/if}
+                    <a id="btn_submit" class="login-button">注册</a>
+                </form> 
+                <a href="{:mac_url('user/login')}">
+                    <span class="login-href">登录账号</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+{include file="public/footer" /}
+<script type="text/javascript">
+
+    var countdown=60;
+    function settime(val) {
+        if (countdown == 0) {
+            val.removeAttribute("disabled");
+            val.value="获取验证码";
+            countdown = 60;
+            return true;
+        } else {
+            val.setAttribute("disabled", true);
+            val.value="重新发送(" + countdown + ")";
+            countdown--;
+        }
+        setTimeout(function() {settime(val) },1000)
+    }
+
+
+		$("body").bind('keyup',function(event) {
+			if(event.keyCode==13){ $('#btn_submit').click(); }
+		});
+
+        $('#btn_send_sms').click(function(){
+            var ac = $('input[name="ac"]').val();
+            var to = $('input[name="to"]').val();
+            if(ac=='email') {
+                var pattern = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+                var ex = pattern.test(to);
+                if (!ex) {
+                    layer.msg('邮箱格式不正确');
+                    return;
+                }
+            }
+            else if(ac=='phone') {
+                var pattern=/^[1][0-9]{10}$/;
+                var ex = pattern.test(to);
+                if (!ex) {
+                    layer.msg('手机号格式不正确');
+                    return;
+                }
+            }
+            else{
+                layer.msg('参数错误');
+                return;
+            }
+
+
+            settime(this);
+            var data = $("#fm").serialize();
+
+            $.ajax({
+                url: "{:mac_url('user/reg_msg')}",
+                type: "post",
+                dataType: "json",
+                data: data,
+                beforeSend: function () {
+                    //开启loading
+                },
+                success: function (r) {
+                    layer.msg(r.msg);
+                },
+                complete: function () {
+                    //结束loading
+                }
+            });
+        });
+
+		$('#btn_submit').click(function() {
+			if ($('#user_name').val()  == '') { layer.msg('请输入用户！'); $("#user_name").focus(); return false; }
+			if ($('#user_pwd').val()  == '') { layer.msg('请输入密码！'); $("#user_pwd").focus(); return false; }
+			if ($('#verify').val()  == '') { layer.msg('请输入验证码！'); $("#verify").focus(); return false; }
+
+			$.ajax({
+				url: "{:mac_url('user/reg')}",
+				type: "post",
+				dataType: "json",
+				data: $('#fm').serialize(),
+				beforeSend: function () {
+					$("#btn_submit").css("background","#fd6a6a").val("loading...");
+				},
+				success: function (r) {
+					alert(r.msg);
+					if(r.code==1){
+						location.href="{:mac_url('user/login')}";
+					}
+					else{
+						$('#verify_img').click();
+					}
+				},
+				complete: function () {
+					$("#btn_submit").css("background","#fa4646").val("立即注册");
+				}
+			});
+
+		});
+
+</script>
+
+</body>
+
+</html>

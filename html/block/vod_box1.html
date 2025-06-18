@@ -1,0 +1,27 @@
+<div class="main-item">
+    <div class="img-box">
+        <div class="card-img">
+            <img src="{$vo.vod_pic|mac_url_img}" />
+        </div>
+        <div class="bottom rank_{$key}">{$key}</div>
+        <a class="hover-mask" href="{:mac_url_vod_detail($vo)}">
+            <div class="mask-img"></div>
+        </a>
+    </div>
+    <div class="detail-box">
+        <div class="title">
+            <div class="left">
+				<a href="{:mac_url_vod_detail($vo)}">{$vo.vod_name}</a>
+			</div>
+            <div class="right">
+                <div class="fire-icon"></div>{$vo.vod_hits}
+            </div>
+        </div>
+        <div class="type info text-overflow">类型：{:str_replace(',', '/', $vo.vod_class);}</div>
+        <div class="address info">地区：{$vo.vod_area}</div>
+        <div class="role info">
+            <div style="min-width:35px">主演:</div>
+            <div class="role-info text-overflow">{$vo.vod_actor}</div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+{include file="public/include"}
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<link href="{$maccms.path_tpl}statics/css/mizhiady-plugins.css" rel="stylesheet" type="text/css" />
+<link href="{$maccms.path_tpl}statics/css/mizhiady-user.css" rel="stylesheet" type="text/css" />
+<script src="{$maccms.path}static/js/jquery.imageupload.js"></script>
+<script>
+    (function(){try{var d=document.documentElement;var n='data-theme';var s='setAttribute';var e=localStorage.getItem('theme');if('system'===e||(!e&&false)){var t='(prefers-color-scheme: dark)';var m=window.matchMedia(t);if(m.media!==t||m.matches){d.style.colorScheme='dark';d[s](n,'dark')}else{d.style.colorScheme='light';d[s](n,'light')}}else if(e){d[s](n,e||'')}else{d[s](n,'dark')}if(e==='light'||e==='dark'||!e){d.style.colorScheme=e||'dark'}}catch(e){}})();
+</script>
+{include file="public/style"}

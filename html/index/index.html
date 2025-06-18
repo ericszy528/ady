@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    {include file="public/include"}
+</head>
+
+<body id="index">
+    {include file="public/header"}
+    <main>
+        <div class="container">
+            {include file="index/index_slide"}<!--海报图-->
+            <div class="row">
+				{include file="index/recommend"}<!--幻灯片下面-->
+                {if condition="$mzadydata['mzadycms']['s3']['ad1'] eq 1"}{include file="ads/ad1"}{/if}<!--首页广告-->
+                {if condition="$mzadydata['mzadycms']['s2']['hot'] eq 1"}{include file="index/hot"}{/if}<!--正在热播-->
+
+				{if condition="$mzadydata['mzadycms']['s2']['zztuijian'] eq 1"}{include file="block/vod_tuijian"}{/if}<!--站长推荐-->
+				
+				
+				<!--全局影片分类-->
+				{maccms:type ids="'.$mzadydata['mzadycms']['s2']['logtype'].'" mid="1" order="asc" by="sort" id="for" key="key2"}
+                {include file="block/vod_list1"}
+                {/maccms:type}
+                <!--全局影片分类-->
+                
+
+            </div>
+        </div>
+    </main>
+    {include file="public/footer"}
+</body>
+</html>

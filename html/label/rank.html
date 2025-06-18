@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    {include file="public/include"}
+	<title>排行榜 - {$maccms.site_name}</title>
+	<meta name="keywords" content="{$maccms.site_keywords}" />
+	<meta name="description" content="{$maccms.site_description}" />
+</head>
+<body>
+    {include file="public/header"}
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="rank-list">
+					{maccms:type ids="'.$mzadydata['mzadycms']['s4']['ranktype'].'" mid="1" order="asc" by="sort" id="voo" key="key"}
+                    <div class="rank-box">
+                        <div class="header">{$voo['type_name']}总榜单</div>
+                        <div class="main">
+                            {maccms:vod type="'.$voo['type_id'].'" order="desc" by="hits" num="10"}
+                            {include file="block/vod_box1"}
+                            {/maccms:vod}
+                        </div>
+                    </div>
+                    {/maccms:type}
+                </div>
+            </div>
+        </div>
+    </main>
+    {include file="public/footer"}
+</body>
+</html>

@@ -1,0 +1,46 @@
+<footer class="hidden-md">{$mzadydata.mzadycms.s1.sm}</footer>
+
+<div class="side-top">
+    <a class="svg-box go-home" href="/"></a>
+    <a class="svg-box toggle" href="javascript:;" id="theme-switcher">
+        <span class="iconfont icon-yejian"></span>
+    </a>
+    <a class="backtop svg-box" href="javascript:;">
+        <span class="iconfont icon-gotop"></span>
+    </a>
+</div>
+{include file="public/ajax-login"}
+<script>
+$(document).ready(function () {
+    var mark = true;
+    header = $('.myui-header__top');
+    $(window).scroll(function () {
+        var scrollheight = parseInt($(document).scrollTop());
+        if (scrollheight >= 300) {
+            if (mark) {
+                mark = false;
+                header.addClass("header-bg");
+            }
+        } else {
+            if (!mark) {
+                mark = true;
+                header.removeClass("header-bg");
+            }
+        }
+    });
+    $('#theme-switcher').on('click', function() {
+        var currentTheme = localStorage.getItem('theme') || 'dark';
+        var newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        localStorage.setItem('theme', newTheme);
+        applyTheme();
+    });
+    function applyTheme() {
+        var currentTheme = localStorage.getItem('theme') || 'dark';
+        $('html').attr('data-theme', currentTheme);
+    }
+    if (!localStorage.getItem('theme')) {
+        localStorage.setItem('theme', 'dark');
+    }
+    applyTheme();
+});
+</script>

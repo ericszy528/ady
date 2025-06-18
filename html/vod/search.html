@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    {include file="public/include"}
+</head>
+
+<body>
+    {include file="public/header"}
+    <main class="show search">
+        <div class="container">
+            <div class="row">
+                <div class="vod-list-box">
+                    <div class="search-head">
+                        <span>与“</span><span style="color: rgb(217, 40, 40);">{$param.wd}{$param.actor}{$param.director}{$param.area}{$param.lang}{$param.year}{$param.class}</span><span>”相关的影片 共<span class="hl-total"></span>个</span>
+                    </div>
+                    <div class="show-vod-list" style="border: none;">
+                        <div class="movie-ul">
+                            {maccms:vod num="24" paging="yes" pageurl="vod/search" order="desc" by="time"}	
+                            {include file="block/vod_box"}
+                            {/maccms:vod}
+                        </div>
+                    </div>
+                </div>
+                {include file="public/page"}
+            </div>
+        </div>
+    </main>
+    {include file="public/footer"}
+    <script type="text/javascript">
+        $('.hl-total').html('{$__PAGING__.record_total}');
+    </script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>会员中心 - {$maccms.site_name}</title>
+    <meta name="keywords" content="{$maccms.site_keywords}" />
+	<meta name="description" content="{$maccms.site_description}" />
+    {include file="user/include"}
+</head>
+
+<body>
+    {php}
+    $nav = 'plays';
+    {/php}
+    {include file="public/header"}
+    <div class="container">
+        <div class="row">
+            <main class="user-info">
+                {include file="user/head"}
+                <aside class="right-side">
+                    <section class="tab">
+                        <ul>
+                            <li class="active">历史记录</li>
+                            <li class=""><a href="javascript:;" id="btnClear">清空记录</a></li>
+                        </ul>
+                    </section>
+                    <section class="content list">
+                        <div class="list-box">
+                            <div class="table-header">
+                                <table>
+                                    <colgroup class="hidden-sm hidden-xs">
+                                        <col>
+                                        <col>
+                                        <col>
+                                        <col>
+                                        <col>
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th class="title">选择</th>
+                                            <th class="title">编号</th>
+                                            <th class="title" style="text-align: left;">名称</th>
+                                            <th class="title">消耗积分</th>
+                                            <th class="title">操作</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div class="table_scroll" style="flex: 1 1 0%; overflow-y: auto;">
+                                <table>
+                                    <colgroup class="hidden-sm hidden-xs">
+                                        <col>
+                                        <col>
+                                        <col>
+                                        <col>
+                                        <col>
+                                    </colgroup>
+                                    <tbody>
+                                        {volist name="list" id="vo"}
+                                        {if condition="$vo.ulog_mid eq 1"}
+                                        <tr>
+                                            <td class="item">
+                                                <div><input type="checkbox" name="ids[]" id="checkbox" value="{$vo.ulog_id}"/></div>
+                                            </td>
+                                            <td class="item">
+                                                <div>{$vo.ulog_id}</div>
+                                            </td>
+                                            <td class="item">
+                                                <div class="text-overflow" style="text-align: left;">
+                                                    <a href="{$vo.data.link}">
+                                                        <span>{$vo.data.name}</span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td class="item">
+                                                <div>{$vo.ulog_points}</div>
+                                            </td>
+                                            <td class="item">
+                                                <div>
+                                                    <a class="del-btn" href="javascript:;" onclick="delData({$vo.ulog_id},0)" class="delete">删除</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {/if}
+			  					        {/volist}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+                    <footer class="list-foot">
+                        <div>
+                            <span><a href="javascript:;" onClick="MAC.CheckBox.All('ids[]');">全选</a></span>
+                            <span><a href="javascript:;" onClick="MAC.CheckBox.Other('ids[]');">反选</a></span>
+                            <span><a href="javascript:;" id="btnDel">删除</a></span>
+                        </div>
+                        <span>{include file="public/page"}</span>
+                    </footer>
+                </aside>
+            </main>
+        </div>
+    </div>
+    {include file="public/footer"}
+    <script>
+        function delData(ids,all){
+            var msg ='删除';
+            if(all==1){
+                msg='清空';
+            }
+            if(confirm('确定要'+msg+'记录吗')){
+                $.post("{:mac_url('user/ulog_del')}",{ids:ids,type:4,all:all},function(data) {
+                    if (data.code == '1') {
+                        layer.msg('删除成功',{anim:5},function(){
+                            location.reload();
+                        });
+                    }else {
+                        layer.msg('删除失败'+ data.msg);
+                    }
+                }, 'json')
+            }
+        }
+        $("#btnClear").click(function(){
+            delData('',1);
+        });
+        $("#btnDel").click(function(){
+            var ids = MAC.CheckBox.Ids('ids[]');
+            if(ids==''){
+                layer.msg('请至少选择一个数据');
+                return;
+            }
+            delData(ids,0);
+        });
+    </script>
+</body>
+
+</html>

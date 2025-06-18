@@ -1,0 +1,78 @@
+<div class="mizhiady-recommend hidden-md hidden-xs">
+    <div class="mizhiady-recommend-box">
+    {if condition="$mzadydata['mzadycms']['s2']['gonggao'] eq 1"}
+        <div class="notice-box">
+            <div class="ann-icon"><i class="iconfont iconfont icon-tongzhi2
+"></i></div>
+            <div class="ann-text">
+                <p>
+                    <span>{$mzadydata.mzadycms.s2.gonggao_noti}</span>
+                </p>
+            </div>
+        </div>
+        {/if}
+         <!-- 左侧分类区域 -->
+        {if condition="$mzadydata['mzadycms']['s2']['nav_hb'] eq 1"}
+        <div class="category-box left">
+        {if condition="$mzadydata['mzadycms']['s2']['navn1'] eq 1"}
+            <!-- 电影分类 -->
+            <div class="item">
+               <a href="{:mac_url_type(['type_id'=>$mzadydata['mzadycms']['s2']['navn1idnum']])}">
+                    <div class="head"><span class="{$mzadydata.mzadycms.s2.navn1_ico}"></span><div class="name">{$mzadydata.mzadycms.s2.navn1_title}</div></div>
+                </a>
+                <div class="content">
+                    {maccms:type parent="'.$mzadydata['mzadycms']['s2']['navn1idnum'].'" order="asc" by="sort" num="'.$mzadydata['mzadycms']['s2']['navn1idtypenum'].'"}
+                    <a href="{:mac_url_type($vo,[],'show')}">{$vo.type_name}</a>
+                    {/maccms:type}
+                </div>
+            </div>
+        {/if}
+        {if condition="$mzadydata['mzadycms']['s2']['navn2'] eq 1"}
+            <!-- 电视剧分类 -->
+            <div class="item">
+                <a href="{:mac_url_type(['type_id'=>$mzadydata['mzadycms']['s2']['navn2idnum']])}">
+                    <div class="head"><span class="{$mzadydata.mzadycms.s2.navn2_ico}"></span><div class="name">{$mzadydata.mzadycms.s2.navn2_title}</div></div>
+                </a>
+                <div class="content">
+                    {maccms:type parent="'.$mzadydata['mzadycms']['s2']['navn2idnum'].'" order="asc" by="sort" num="'.$mzadydata['mzadycms']['s2']['navn2idtypenum'].'"}
+                    <a href="{:mac_url_type($vo,[],'show')}">{$vo.type_name}</a>
+                    {/maccms:type}
+                </div>
+            </div>
+        {/if}
+            
+        </div>
+        {/if}
+        <!-- 右侧分类区域 -->
+        {if condition="$mzadydata['mzadycms']['s2']['nav_hb'] eq 1"}
+        <div class="category-box right">
+        {if condition="$mzadydata['mzadycms']['s2']['navn3'] eq 1"}
+            <!-- 动漫分类 -->
+            <div class="item">
+                <a href="{:mac_url_type(['type_id'=>$mzadydata['mzadycms']['s2']['navn3idnum']])}">
+                    <div class="head"><span class="{$mzadydata.mzadycms.s2.navn3_ico}"></span><div class="name">{$mzadydata.mzadycms.s2.navn3_title}</div></div>
+                </a>
+                <div class="content">
+                    {maccms:type parent="'.$mzadydata['mzadycms']['s2']['navn3idnum'].'" order="asc" by="sort" num="'.$mzadydata['mzadycms']['s2']['navn3idtypenum'].'"}
+                    <a href="{:mac_url_type($vo,[],'show')}">{$vo.type_name}</a>
+                    {/maccms:type}
+                </div>
+            </div>
+            {/if}
+            {if condition="$mzadydata['mzadycms']['s2']['navn4'] eq 1"}
+            <!-- 综艺分类 -->
+            <div class="item">
+                <a href="{:mac_url_type(['type_id'=>$mzadydata['mzadycms']['s2']['navn4idnum']])}">
+                    <div class="head"><span class="{$mzadydata.mzadycms.s2.navn4_ico}"></span><div class="name">{$mzadydata.mzadycms.s2.navn4_title}</div></div>
+                </a>
+                <div class="content">
+                    {maccms:type parent="'.$mzadydata['mzadycms']['s2']['navn4idnum'].'" order="asc" by="sort" num="'.$mzadydata['mzadycms']['s2']['navn4idtypenum'].'"}
+                    <a href="{:mac_url_type($vo,[],'show')}">{$vo.type_name}</a>
+                    {/maccms:type}
+                </div>
+            </div>
+            {/if}
+        </div>
+        {/if}
+    </div>
+</div>
